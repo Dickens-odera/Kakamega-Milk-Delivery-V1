@@ -3,7 +3,7 @@ const MilkDeliveryContract = artifacts.require("MilkDelivery");
 contract("MilkDeliveryContract", function (accounts) {
   let contractInstance;
   let newVendor;
-  beforEach(async() => {
+  beforeEach(async() => {
     contractInstance = await MilkDeliveryContract.deployed();
     [owner, alice, bob, vendor1, vendor2, vendor3] = accounts;
     newVendor = {
@@ -30,9 +30,11 @@ contract("MilkDeliveryContract", function (accounts) {
         );
 
       const totalVendors = await contractInstance.totalVendors();
-      assert(totalVendors, 1);
-      assert(result.logs[0].args.vendor, vendor1);
-      assert(result.logs[0].args.addedBy, owner);
+      const isListed = await contractInstance.isVendorListed(vendor1);
+      assert.equal(totalVendors, 1);
+      assert.equal(isListed, true);;
+      assert.equal(result.logs[0].args.vendor, vendor1);
+      assert.equal(result.logs[0].args.addedBy, owner);
     }); 
 
     it("should enable the contract owner to approve a new vendor for recording milk deliveries", async () => {

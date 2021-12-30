@@ -38,7 +38,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
     MILK_QUALITY_TYPE milkQualityType;
   }
 
-  uint totalVendors = 0; //total vendors initialised to 0
+  uint public totalVendors = 0; //total vendors initialised to 0
   uint public totalQuantities = 0; //keeps track of total milk quantity recorded on-chain
   uint public totalDeliveries = 0; //to handle incrementing of overral milk quantities
 
