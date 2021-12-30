@@ -47,7 +47,6 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
   
   mapping(address => bool) public isApprovedForMilkVending; //a boolean indicating whether a vendor has been approved
   mapping(address => MilkDeliveryItem) public deliveryItemByVendor; //get the delivery item by vendor identified by an address
-  mapping(address => uint) public vendorQuantity; //vendor quantity of milk delivered
   mapping(address => mapping(uint => uint)) vendorQuantityByDate; //keeps track of the total quantity of the vendor by date [address][date][quantity]
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
