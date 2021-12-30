@@ -21,7 +21,7 @@ contract("MilkDeliveryContract", function (accounts) {
 
   describe("Vendor functionalities", async() => {
     it("should enable the contract owner to add a new vendor", async() => {
-      const result = await contractInstance.addNewVendor(
+      const result = await contractInstance.listNewVendor(
         newVendor.address,
         newVendor.milkFactory, 
         newVendor.name, 
@@ -31,6 +31,8 @@ contract("MilkDeliveryContract", function (accounts) {
 
       const totalVendors = await contractInstance.totalVendors();
       const isListed = await contractInstance.isVendorListed(vendor1);
+
+      assert(result.receipt.status, true);
       assert.equal(totalVendors, 1);
       assert.equal(isListed, true);;
       assert.equal(result.logs[0].args.vendor, vendor1);
@@ -38,8 +40,11 @@ contract("MilkDeliveryContract", function (accounts) {
     }); 
 
     it("should enable the contract owner to approve a new vendor for recording milk deliveries", async () => {
-      const result = await contractInstance.approveVendor(vendor1);
+      const result = await contractInstance.approveVendor(vendor1, {from:owner});
+      const isApproved = await contractInstance.isApprovedForMilkVending(vendor1);
 
+      assert(result.receipt.status, true);
+      assert.equal(isApproved, true);
     });
   });
 

@@ -101,7 +101,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
     * @param _name string
     * @param _email string 
    */
-  function addNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public 
+  function listNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public 
   onlyOwner 
   vendorNotListed(_newVendor)
   returns(bool)
