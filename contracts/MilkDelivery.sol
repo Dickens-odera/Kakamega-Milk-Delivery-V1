@@ -120,6 +120,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
       emit NewMilkVendorAdded(_newVendor, msg.sender, block.timestamp);
       return true;
   }
+  
   /**
    * @dev returns the total quantity of milk recorded by a vendor on a specific date
    * @param _vendor address
