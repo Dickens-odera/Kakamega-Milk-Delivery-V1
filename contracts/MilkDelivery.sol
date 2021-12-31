@@ -54,6 +54,8 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
   event NewMilkVendorAdded(address indexed vendor, address indexed addedBy, uint indexed date);
+  event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date);
+  event MilkVendorDelisted(address indexed vendor, address indexed caller, uint date);
 
   error BadRecord();
 
@@ -152,6 +154,26 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
     totalQuantities = totalQuantities.add(_quantity);
     emit NewMilkDeliveryRecorded(msg.sender,_quantity,_qualityType, block.timestamp);
     return true;
+  }
+
+  /**
+    * @dev enables contract owner to delist a vendor
+    * @param _vendor address
+   */
+  function delistVendor(address _vendor) public onlyOwner isListedAsAvendor(_vendor) returns(bool){
+    isVendorListed[_vendor] = false;
+    emit MilkVendorDelisted(_vendor, msg.sender, block.timestamp);
+    return true;
+  }
+
+  /**
+    * @dev revoke a milk vendor's approval for milk vending
+    * @param _vendor address
+   */
+  function revokeVendorApproval(address _vendor) public onlyOwner isApprovedForVending(_vendor) returns(bool){
+      isApprovedForMilkVending[_vendor] = false;
+      emit MilkVendorDisapproved(_vendor, msg.sender, block.timestamp);
+      return true;
   }
 
   /**
