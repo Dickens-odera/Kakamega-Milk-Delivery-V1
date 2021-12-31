@@ -73,7 +73,7 @@ contract("MilkDeliveryContract", function (accounts) {
       assert.equal(result.logs[0].args.quantity, 200);
     });
 
-    it("can only allow a listed vendor to record delivery item", async() => {
+    it("can only allow a listed vendor to record a new delivery item", async() => {
         try{
           const result = await contractInstance.recordNewDelivery(deliveryItem.quantity, deliveryItem.quality, { from: vendor2 });
 
