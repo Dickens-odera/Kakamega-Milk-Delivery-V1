@@ -1,6 +1,5 @@
 const MilkDeliveryContract = artifacts.require("MilkDelivery");
 const assert = require("assert");
-//const truffleAssert = require("truffle-assertions");
 
 contract("MilkDeliveryContract", function (accounts) {
   let contractInstance;
