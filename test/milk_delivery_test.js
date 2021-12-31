@@ -50,7 +50,22 @@ contract("MilkDeliveryContract", function (accounts) {
 
   describe("Milk delivery", async() => {
     it("should successfully enable a vendor to record a new delivery item", async() => {
-        
+      const deliveryItem = {
+        quantity: 200,
+        quality: 1
+      };
+
+      const result = await contractInstance.recordNewDelivery(deliveryItem.quantity,deliveryItem.quality, {from: vendor1});
+
+      const totalDeliveries = await contractInstance.totalDeliveries();
+      const totalQuantities = await contractInstance.totalQuantities();
+
+      assert(result.receipt.status, true);
+      assert.equal(totalDeliveries, 1);
+      assert.equal(totalQuantities, 200);
+      assert.equal(result.logs[0].args.vendor, vendor1);
+      assert.equal(result.logs[0].args.quality, deliveryItem.quality);
+      assert.equal(result.logs[0].args.quantity, 200);
     });
   });
 });

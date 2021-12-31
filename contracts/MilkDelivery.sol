@@ -48,7 +48,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
   
   mapping(address => bool) public isApprovedForMilkVending; //a boolean indicating whether a vendor has been approved
   mapping(address => MilkDeliveryItem) public deliveryItemByVendor; //get the delivery item by vendor identified by an address
-  mapping(address => mapping(uint => uint)) vendorQuantityByDate; //keeps track of the total quantity of the vendor by date [address][date][quantity]
+  mapping(address => mapping(uint => uint)) public vendorQuantityByDate; //keeps track of the total quantity of the vendor by date [address][date][quantity]
   mapping(address => Vendor) public vendorsByUser; //who added thie vendor item
   mapping(address => bool) public isVendorListed; //to show whether this address is listed as a vendor or not
 
@@ -120,7 +120,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
       emit NewMilkVendorAdded(_newVendor, msg.sender, block.timestamp);
       return true;
   }
-  
+
   /**
    * @dev returns the total quantity of milk recorded by a vendor on a specific date
    * @param _vendor address
