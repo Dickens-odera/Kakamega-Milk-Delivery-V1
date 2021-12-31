@@ -1,18 +1,28 @@
 const MilkDeliveryContract = artifacts.require("MilkDelivery");
+const assert = require("assert");
+//const truffleAssert = require("truffle-assertions");
 
 contract("MilkDeliveryContract", function (accounts) {
   let contractInstance;
   let newVendor;
+  let deliveryItem;
   beforeEach(async() => {
     contractInstance = await MilkDeliveryContract.deployed();
     [owner, alice, bob, vendor1, vendor2, vendor3] = accounts;
+
     newVendor = {
           address: vendor1,
           milkFactory: "Milk Burgers",
           name:"John Doe", 
           email: "john@milk.burgers.com"
       };
+
+    deliveryItem = {
+      quantity: 200,
+      quality: 1
+    };
   });
+
   describe("deployment", function () {
     it("should deploy successfully", async() => {
       assert(contractInstance,"milk delivery contract deployed successfully");
@@ -50,11 +60,6 @@ contract("MilkDeliveryContract", function (accounts) {
 
   describe("Milk delivery", async() => {
     it("should successfully enable a vendor to record a new delivery item", async() => {
-      const deliveryItem = {
-        quantity: 200,
-        quality: 1
-      };
-
       const result = await contractInstance.recordNewDelivery(deliveryItem.quantity,deliveryItem.quality, {from: vendor1});
 
       const totalDeliveries = await contractInstance.totalDeliveries();
@@ -66,6 +71,17 @@ contract("MilkDeliveryContract", function (accounts) {
       assert.equal(result.logs[0].args.vendor, vendor1);
       assert.equal(result.logs[0].args.quality, deliveryItem.quality);
       assert.equal(result.logs[0].args.quantity, 200);
+    });
+
+    it("can only allow a listed vendor to record delivery item", async() => {
+        try{
+          const result = await contractInstance.recordNewDelivery(deliveryItem.quantity, deliveryItem.quality, { from: vendor2 });
+
+        }catch(error){
+          assert(error.message.includes("Milk Vendor not listed"));
+          return;
+        }
+        assert(false);
     });
   });
 });
