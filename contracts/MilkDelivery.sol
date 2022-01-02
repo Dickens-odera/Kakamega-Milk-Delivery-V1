@@ -56,7 +56,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
   event NewMilkVendorAdded(address indexed vendor, address indexed addedBy, uint indexed date);
-  event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date, address[] indexed approvedVendors);
+  event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date); //address[] indexed approvedVendors
   event MilkVendorDelisted(address indexed vendor, address indexed caller, uint date);
 
   error BadRecord();
@@ -175,15 +175,18 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
    */
   function revokeVendorApproval(address _vendor) public onlyOwner isApprovedForVending(_vendor) returns(bool){
       isApprovedForMilkVending[_vendor] = false;
-      //remove this vendor from the aproved vendors array and maintain the array order
+      //remove this vendor from the approved vendors array and maintain the array order
+      /** 
       for(uint i = 0; i < approvedVendors.length - 1; i++){
         if(approvedVendors[i] == _vendor){
           approvedVendors[i] = approvedVendors[i + 1];
         }
       }
+      
       approvedVendors.pop();
+      */
       totalApprovedVendors = totalApprovedVendors.sub(1);
-      emit MilkVendorDisapproved(_vendor, msg.sender, block.timestamp,approvedVendors);
+      emit MilkVendorDisapproved(_vendor, msg.sender, block.timestamp); //approvedVendors
       return true;
   }
 
