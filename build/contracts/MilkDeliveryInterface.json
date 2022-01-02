@@ -15,7 +15,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"totalQuantity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/MilkDeliveryInterface.sol\":\"MilkDeliveryInterface\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/MilkDeliveryInterface.sol\":{\"keccak256\":\"0xbd7e2e59256aaf93b72ea014f4871bec3777931114942c642c04fa2ca0a3f308\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19c1a7376ab2acd525dd23523b473b665009e85ba9e24e86f48a3b4e3c6acd5d\",\"dweb:/ipfs/QmUJrobZDG1w2P8uyfBxPhGK42wLrM1rfv1hkvbdJXWbJy\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"totalQuantity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/MilkDeliveryInterface.sol\":\"MilkDeliveryInterface\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/MilkDeliveryInterface.sol\":{\"keccak256\":\"0xbd7e2e59256aaf93b72ea014f4871bec3777931114942c642c04fa2ca0a3f308\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19c1a7376ab2acd525dd23523b473b665009e85ba9e24e86f48a3b4e3c6acd5d\",\"dweb:/ipfs/QmUJrobZDG1w2P8uyfBxPhGK42wLrM1rfv1hkvbdJXWbJy\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -24,9 +24,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface MilkDeliveryInterface {\n  function totalQuantity() external view returns(uint);\n}\n",
-  "sourcePath": "D:\\Dickens\\Programming\\Blockchain\\Projects\\Research Projects\\MMUST\\Dairy Farmers Milk Delivery\\contracts\\MilkDeliveryInterface.sol",
+  "sourcePath": "D:\\Dickens\\Programming\\Blockchain\\Projects\\Research Projects\\MMUST\\Dairy Farmers Milk Delivery\\contracts\\interfaces\\MilkDeliveryInterface.sol",
   "ast": {
-    "absolutePath": "project:/contracts/MilkDeliveryInterface.sol",
+    "absolutePath": "project:/contracts/interfaces/MilkDeliveryInterface.sol",
     "exportedSymbols": {
       "MilkDeliveryInterface": [
         1838
@@ -126,7 +126,7 @@
     "src": "32:117:12"
   },
   "legacyAST": {
-    "absolutePath": "project:/contracts/MilkDeliveryInterface.sol",
+    "absolutePath": "project:/contracts/interfaces/MilkDeliveryInterface.sol",
     "exportedSymbols": {
       "MilkDeliveryInterface": [
         1838
@@ -231,7 +231,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-01-02T11:16:58.698Z",
+  "updatedAt": "2022-01-02T13:00:08.856Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
