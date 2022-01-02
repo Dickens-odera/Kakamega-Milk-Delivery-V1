@@ -29,15 +29,15 @@
     "absolutePath": "project:/contracts/MilkDeliveryInterface.sol",
     "exportedSymbols": {
       "MilkDeliveryInterface": [
-        1156
+        1838
       ]
     },
-    "id": 1157,
+    "id": 1839,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1150,
+        "id": 1832,
         "literals": [
           "solidity",
           "^",
@@ -45,7 +45,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:7"
+        "src": "32:23:12"
       },
       {
         "abstract": false,
@@ -54,42 +54,42 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1156,
+        "id": 1838,
         "linearizedBaseContracts": [
-          1156
+          1838
         ],
         "name": "MilkDeliveryInterface",
-        "nameLocation": "67:21:7",
+        "nameLocation": "67:21:12",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "c616f412",
-            "id": 1155,
+            "id": 1837,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "totalQuantity",
-            "nameLocation": "102:13:7",
+            "nameLocation": "102:13:12",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1151,
+              "id": 1833,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "115:2:7"
+              "src": "115:2:12"
             },
             "returnParameters": {
-              "id": 1154,
+              "id": 1836,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1153,
+                  "id": 1835,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1155,
-                  "src": "140:4:7",
+                  "scope": 1837,
+                  "src": "140:4:12",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -97,10 +97,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1152,
+                    "id": 1834,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "140:4:7",
+                    "src": "140:4:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -109,35 +109,35 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "139:6:7"
+              "src": "139:6:12"
             },
-            "scope": 1156,
-            "src": "93:53:7",
+            "scope": 1838,
+            "src": "93:53:12",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1157,
-        "src": "57:91:7",
+        "scope": 1839,
+        "src": "57:91:12",
         "usedErrors": []
       }
     ],
-    "src": "32:117:7"
+    "src": "32:117:12"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/MilkDeliveryInterface.sol",
     "exportedSymbols": {
       "MilkDeliveryInterface": [
-        1156
+        1838
       ]
     },
-    "id": 1157,
+    "id": 1839,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1150,
+        "id": 1832,
         "literals": [
           "solidity",
           "^",
@@ -145,7 +145,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:7"
+        "src": "32:23:12"
       },
       {
         "abstract": false,
@@ -154,42 +154,42 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1156,
+        "id": 1838,
         "linearizedBaseContracts": [
-          1156
+          1838
         ],
         "name": "MilkDeliveryInterface",
-        "nameLocation": "67:21:7",
+        "nameLocation": "67:21:12",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "c616f412",
-            "id": 1155,
+            "id": 1837,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "totalQuantity",
-            "nameLocation": "102:13:7",
+            "nameLocation": "102:13:12",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1151,
+              "id": 1833,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "115:2:7"
+              "src": "115:2:12"
             },
             "returnParameters": {
-              "id": 1154,
+              "id": 1836,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1153,
+                  "id": 1835,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1155,
-                  "src": "140:4:7",
+                  "scope": 1837,
+                  "src": "140:4:12",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -197,10 +197,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1152,
+                    "id": 1834,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "140:4:7",
+                    "src": "140:4:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -209,21 +209,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "139:6:7"
+              "src": "139:6:12"
             },
-            "scope": 1156,
-            "src": "93:53:7",
+            "scope": 1838,
+            "src": "93:53:12",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1157,
-        "src": "57:91:7",
+        "scope": 1839,
+        "src": "57:91:12",
         "usedErrors": []
       }
     ],
-    "src": "32:117:7"
+    "src": "32:117:12"
   },
   "compiler": {
     "name": "solc",
@@ -231,7 +231,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-12-31T13:20:01.805Z",
+  "updatedAt": "2022-01-02T11:16:58.698Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

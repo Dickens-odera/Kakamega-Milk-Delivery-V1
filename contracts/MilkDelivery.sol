@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./MilkDeliveryInterface.sol";
@@ -9,7 +10,7 @@ import "./MilkDeliveryInterface.sol";
   * @title Milk Delivery Contract
   * @dev A smart contract that enables dairy farmers to record their daily produce
  */
-contract MilkDelivery is Ownable, MilkDeliveryInterface {
+contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
   using SafeMath for uint256;
   using Counters for Counters.Counter;
 
@@ -41,6 +42,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
   uint public totalVendors = 0; //total vendors initialised to 0
   uint public totalQuantities = 0; //keeps track of total milk quantity recorded on-chain
   uint public totalDeliveries = 0; //to handle incrementing of overral milk quantities
+  uint public totalApprovedVendors = 0; // shall be incremented and decremented accordingly
 
   Vendor[] public vendors; //an array of the vendors
   MilkDeliveryItem[] public milkDeliveries; //to help keep track of delivery items as an array
@@ -54,7 +56,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
   event NewMilkVendorAdded(address indexed vendor, address indexed addedBy, uint indexed date);
-  event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date);
+  event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date, address[] indexed approvedVendors);
   event MilkVendorDelisted(address indexed vendor, address indexed caller, uint date);
 
   error BadRecord();
@@ -93,6 +95,7 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
    function approveVendor(address _vendor) public onlyOwner isNotApprovedForVending(_vendor) returns(bool){
       isApprovedForMilkVending[_vendor] = true;
       approvedVendors.push(_vendor);
+      totalApprovedVendors = totalApprovedVendors.add(1);
       return true;
    }
 
@@ -172,7 +175,15 @@ contract MilkDelivery is Ownable, MilkDeliveryInterface {
    */
   function revokeVendorApproval(address _vendor) public onlyOwner isApprovedForVending(_vendor) returns(bool){
       isApprovedForMilkVending[_vendor] = false;
-      emit MilkVendorDisapproved(_vendor, msg.sender, block.timestamp);
+      //remove this vendor from the aproved vendors array and maintain the array order
+      for(uint i = 0; i < approvedVendors.length - 1; i++){
+        if(approvedVendors[i] == _vendor){
+          approvedVendors[i] = approvedVendors[i + 1];
+        }
+      }
+      approvedVendors.pop();
+      totalApprovedVendors = totalApprovedVendors.sub(1);
+      emit MilkVendorDisapproved(_vendor, msg.sender, block.timestamp,approvedVendors);
       return true;
   }
 

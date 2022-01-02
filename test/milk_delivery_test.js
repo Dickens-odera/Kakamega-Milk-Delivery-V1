@@ -55,6 +55,27 @@ contract("MilkDeliveryContract", function (accounts) {
       assert(result.receipt.status, true);
       assert.equal(isApproved, true);
     });
+
+    it("should enable the contract owner to revoke a vendor\'s approval from milk vending", async() => {
+      const totalApprovedVendors = await contractInstance.totalApprovedVendors();
+      let approvedVendorsList = [];
+      for (let i = 0; i < totalApprovedVendors; i++){
+        const data = await contractInstance.approvedVendors(i);
+        approvedVendorsList.push(data);
+      }
+      
+      const result = await contractInstance.revokeVendorApproval(vendor1, { from: owner });
+
+      assert(result.receipt.status, true);
+      assert.equal(result.logs[0].args.caller, owner);
+      assert.equal(result.logs[0].args.vendor, vendor1);
+      assert.equal(result.logs[0].args.approvedVendors.length, 0);
+    });
+
+    it("should enable the contract owner to delist a vendor", async() => {
+
+    });
+
   });
 
   describe("Milk delivery", async() => {
