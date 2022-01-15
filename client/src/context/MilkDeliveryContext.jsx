@@ -96,7 +96,7 @@ export const MilkDeliveryProvider = ({ children }) => {
                 quantity: item.quantity.toNumber(),
                 quality: item.milkQualityType,
                 vendor: item.vendor,
-                date: new Date(item.date.toNumber() * 1000 ).toLocaleDateString()
+                date: new Date(item.date.toNumber() * 1000).toLocaleString()
             }));
             console.log(structuredDeliveryItems);
             setMilkDeliveryItems(structuredDeliveryItems);
