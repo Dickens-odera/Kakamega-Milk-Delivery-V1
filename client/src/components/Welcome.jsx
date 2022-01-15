@@ -3,10 +3,10 @@ import { MilkDeliveryContext } from '../context/MilkDeliveryContext';
 import { Button } from 'react-bootstrap';
 
 const Welcome = () => {
-    const { connectWallet, connectedtAccount } = useContext(MilkDeliveryContext);
+    const { connectWallet, connectedAccount } = useContext(MilkDeliveryContext);
     return(
         <div className="md-3">
-            {!connectedtAccount && 
+            {!connectedAccount && 
                 <Button onClick={connectWallet}>Connect Wallet</Button>
             }
         </div>

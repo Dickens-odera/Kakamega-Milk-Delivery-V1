@@ -13,19 +13,11 @@ const getMilkDeliveryContract = () => {
     const signer = provider.getSigner();
     const milkDeliveryConract = new ethers.Contract(ContractAddress, ContractABI, signer);
 
-    /** 
-    console.log({
-        provider,
-        signer,
-        milkDeliveryConract
-    });
-    */
-
     return milkDeliveryConract;
 }
 
 export const MilkDeliveryProvider = ({ children }) => {
-    const [ connectedtAccount, setConnectedAccount ] = useState('');
+    const [ connectedAccount, setConnectedAccount ] = useState('');
     const [ formData, setFormData ] = useState({ quantity: '',quality: ''});
     const [ isLoading, setIsLoading ] = useState(false);
     const [ milkDeliveryItems, setMilkDeliveryItems ] = useState([]);
@@ -56,6 +48,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             if (!ethereum) return alert("Please Install Metamask");
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             setConnectedAccount(accounts[0]);
+            getMilkDeliveryItems();
         }catch(error){
             console.error(error);
             
@@ -117,7 +110,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet, connectedtAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems }}>
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
