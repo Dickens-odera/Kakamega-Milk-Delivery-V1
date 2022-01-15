@@ -13,6 +13,7 @@ const MilkDeliveries = () => {
                                 <div className="card-title">Delivery Item: {item.id}</div>
                             </div>
                             <div className="card-body">
+                                <p>Date: {item.date}</p>
                                 <p>Vendor: {item.vendor}</p>
                                 <p>Quality: {item.quality}</p>
                                 <p>Quantity: {item.quantity}</p>
