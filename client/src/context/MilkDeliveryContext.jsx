@@ -8,7 +8,7 @@ export const MilkDeliveryContext = React.createContext();
 const { ethereum } = window;
 
 const getMilkDeliveryContract = () => {
-    const provider = new ethers.provider.Web3Provider(ethereum);
+    const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
     const milkDeliveryConract = new ethers.Contract(ContractAddress, ContractABI, signer);
 
@@ -17,17 +17,17 @@ const getMilkDeliveryContract = () => {
         signer,
         milkDeliveryConract
     })
-
-    return milkDeliveryConract;
+    setDeliveryContract(milkDeliveryConract);
+    //return milkDeliveryConract;
 }
 
 export const MilkDeliveryProvider = ({ children }) => {
     const [connectedtAccount, setConnectedAccount ] = useState('');
-    const [formData, setFormData ] = useState({ amount: '',quality: ''});
-
-
+    const [formData, setFormData ] = useState({ quantity: '',quality: ''});
+    const [deliveryContract, setDeliveryContract ] = useState('');
+    const [ isLoading, setIsLoading ] = useState(false);
     const handleChange = (e, name) => {
-        setFormData(( prevState) => ( { ...prevState, [name]: e.target.value}));
+        setFormData(( prevState ) => ( { ...prevState, [name]: e.target.value}));
     }
 
     const checkIfWalletIsConnected = async() => {
@@ -59,12 +59,26 @@ export const MilkDeliveryProvider = ({ children }) => {
         }
     }
 
+    const addNewDelivery = async() => {
+        const { quantity, quality } = formData;
+        try{
+            if (!ethereum) return alert("Please Install Metamask");
+
+            getMilkDeliveryContract();
+            setIsLoading(true);
+            //const tx = await deliveryContract.recordNewDelivery(quantity, quality);
+        }catch(error){
+            console.error(error);
+            //throw new Error("No Ethereum object detected");
+        }
+    }
+
     useEffect(() => {
         checkIfWalletIsConnected();
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet, connectedtAccount, formData, setFormData }}>
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedtAccount, formData, setFormData, handleChange, addNewDelivery, deliveryContract, isLoading }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
