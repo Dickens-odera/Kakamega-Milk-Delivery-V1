@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
 const Welcome = () => {
-    const { connectWallet } = useContext(MilkDeliveryContext);
+    const { connectWallet, connectedtAccount } = useContext(MilkDeliveryContext);
     return(
         <div>
-            <button onClick={connectWallet}>Connect Wallet</button>
+            {!connectedtAccount && 
+                <button onClick={connectWallet}>Connect Wallet</button>
+            }
         </div>
     );
 }

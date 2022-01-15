@@ -10,29 +10,46 @@ const { ethereum } = window;
 const getMilkDeliveryContract = () => {
     const provider = new ethers.provider.Web3Provider(ethereum);
     const signer = provider.getSigner();
-    const MilkDeliveryConract = new ethers.Contract(ContractAddress, ContractABI, signer);
+    const milkDeliveryConract = new ethers.Contract(ContractAddress, ContractABI, signer);
 
     console.log({
         provider,
         signer,
-        MilkDeliveryConract
+        milkDeliveryConract
     })
+
+    return milkDeliveryConract;
 }
 
 export const MilkDeliveryProvider = ({ children }) => {
     const [connectedtAccount, setConnectedAccount ] = useState('');
-     
+    const [formData, setFormData ] = useState({ amount: '',quality: ''});
+
+
+    const handleChange = (e, name) => {
+        setFormData(( prevState) => ( { ...prevState, [name]: e.target.value}));
+    }
+
     const checkIfWalletIsConnected = async() => {
-        if(!ethereum) return alret("Please Install Metamask");
+        try{
+            if (!ethereum) return alert("Please Install Metamask");
 
-        const accounts = await ethereum.request({ method: 'eth_accounts'});
+            const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-        console.log(accounts);
+            if (accounts.length) {
+                setConnectedAccount(accounts[0]);
+                //getMilkDeliveries()
+            }
+            console.log(accounts);
+        }catch(error){
+            console.error(error);
+            throw new Error("No Ethereum object detected");
+        }
     }
 
     const connectWallet = async() => {
         try{
-            if (!ethereum) return alret("Please Install Metamask");
+            if (!ethereum) return alert("Please Install Metamask");
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             setConnectedAccount(accounts[0]);
         }catch(error){
@@ -47,7 +64,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet }}>
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedtAccount, formData, setFormData }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
