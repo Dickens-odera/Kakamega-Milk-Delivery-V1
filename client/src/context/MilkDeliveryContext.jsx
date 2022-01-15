@@ -68,6 +68,9 @@ export const MilkDeliveryProvider = ({ children }) => {
             if (!ethereum) return alert("Please Install Metamask");
 
             const milkDeliveryConract = getMilkDeliveryContract();
+            //const listVendor = await milkDeliveryConract.listNewVendor(connectedtAccount,"My Factory","Dickens Odera","dickensodera9@gmail.com");
+            //const approveVendor = await milkDeliveryConract.approveVendor(connectedtAccount);
+
             const tx = await milkDeliveryConract.recordNewDelivery(quantity.toString(), quality.toString());
             
             setIsLoading(true);
@@ -81,7 +84,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
         }catch(error){
             console.error(error);
-            //throw new Error("No Ethereum object detected");
+            throw new Error("No Ethereum object detected");
         }
     }
 
@@ -95,8 +98,8 @@ export const MilkDeliveryProvider = ({ children }) => {
             const structuredDeliveryItems = deliveryItems.map(( item, index) => ({ 
                 id: item.id,
                 quantity: item.quantity,
-                quality: item.quality,
-                vendor: item.vemdor,
+                quality: item.milkQualityType,
+                vendor: item.vendor,
                 date: new Date(item.date.toNumber() * 1000 ).toLocaleDateString()
             }));
             console.log(structuredDeliveryItems);

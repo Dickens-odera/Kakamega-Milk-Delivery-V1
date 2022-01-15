@@ -97,7 +97,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     * @dev approves a vendor for milk delivery, only performed by the contract owner
     * @param _vendor address
    */
-   function approveVendor(address _vendor) public onlyOwner isNotApprovedForVending(_vendor) returns(bool){
+   function approveVendor(address _vendor) public isNotApprovedForVending(_vendor) returns(bool){ //onlyOwner
       isApprovedForMilkVending[_vendor] = true;
       approvedVendors.push(_vendor);
       totalApprovedVendors = totalApprovedVendors.add(1);
@@ -111,11 +111,11 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     * @param _name string
     * @param _email string 
    */
-  function listNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public 
-  onlyOwner 
+  function listNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public   
   vendorNotListed(_newVendor)
-  returns(bool)
+  returns(bool) 
   {
+    //onlyOwner
       require(bytes(_milkFactory).length > 0, "New Milk Vendor => Null Factory");
       require(bytes(_name).length > 0, "New Milk Vendor => Null Vendor Name");
       require(bytes(_email).length > 0, "New Milk Vendor => Null Vendor Email");
