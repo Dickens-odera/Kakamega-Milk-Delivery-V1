@@ -7,7 +7,7 @@ const NavbarItem = () => {
         <div className="mb-2">
             <Navbar bg="light" expand={false}>
                 <Container fluid>
-                    <Navbar.Brand href="#">Kakamega Milk Delivery</Navbar.Brand>
+                    <Navbar.Brand href="#">Kakamega Milk Delivery Blockchain DApp</Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar" />
                     <Navbar.Offcanvas
                         id="offcanvasNavbar"
