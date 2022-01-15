@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
-import { ContractABI, ContractAddress } from './utils/constants';
+import { ContractABI, ContractAddress } from '../utils/constants';
 
 export const MilkDeliveryContext = React.createContext();
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { MilkDeliveryContext } from './context/MilkDeliveryContext';
+import { MilkDeliveryContext } from '../context/MilkDeliveryContext';
 
 const Welcome = () => {
     const { connectWallet, connectedtAccount } = useContext(MilkDeliveryContext);
