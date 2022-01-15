@@ -111,11 +111,12 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     * @param _name string
     * @param _email string 
    */
-  function listNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public 
-  onlyOwner 
+  function listNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public   
+  onlyOwner
   vendorNotListed(_newVendor)
-  returns(bool)
+  returns(bool) 
   {
+    //onlyOwner
       require(bytes(_milkFactory).length > 0, "New Milk Vendor => Null Factory");
       require(bytes(_name).length > 0, "New Milk Vendor => Null Vendor Name");
       require(bytes(_email).length > 0, "New Milk Vendor => Null Vendor Email");
@@ -207,5 +208,13 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
    */
   function vendorList() public view returns(Vendor[] memory){
     return vendors;
+  }
+
+  function listAllDeliveryItems() public view returns(MilkDeliveryItem[] memory){
+    return milkDeliveries;
+  }
+
+  function getTotalDeliveries() public view returns(uint){
+    return totalDeliveries;
   }
 }
