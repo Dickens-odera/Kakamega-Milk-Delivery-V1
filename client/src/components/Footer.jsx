@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const Footer = async() => {
+const Footer = () => {
     return(
        <div>
             <h1>Footer</h1>
