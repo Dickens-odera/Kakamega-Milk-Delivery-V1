@@ -28,6 +28,8 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     string email;
     address payable vendorAddress;
     uint createdAt;
+    //bool isApproved;
+    //bool isListed;
   }
 
   //Delivery struct with delivery item particulars
@@ -53,6 +55,9 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
   mapping(address => mapping(uint => uint)) public vendorQuantityByDate; //keeps track of the total quantity of the vendor by date [address][date][quantity]
   mapping(address => Vendor) public vendorsByUser; //who added thie vendor item
   mapping(address => bool) public isVendorListed; //to show whether this address is listed as a vendor or not
+
+  mapping(uint => Vendor) public vendorById; //a mapping of the vebdor id to the struct item
+  mapping(uint => MilkDeliveryItem) public deliveryItemById; // a mapping of the delivery item  by it's id
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
   event NewMilkVendorAdded(address indexed vendor, address indexed addedBy, uint indexed date);
