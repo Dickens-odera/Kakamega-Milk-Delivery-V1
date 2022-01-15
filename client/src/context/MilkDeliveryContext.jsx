@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import swal from 'sweetalert';
 
 import { ContractABI, ContractAddress } from '../utils/constants';
 
@@ -81,8 +82,9 @@ export const MilkDeliveryProvider = ({ children }) => {
             console.log('Sucesss ....');
             console.log(tx.hash);
             setIsLoading(false);
-
+            swal("Delivery Item Added Successfully");
         }catch(error){
+            swal(error.message);
             console.error(error);
             throw new Error("No Ethereum object detected");
         }
@@ -96,8 +98,8 @@ export const MilkDeliveryProvider = ({ children }) => {
 
             const deliveryItems = await milkDeliveryConract.listAllDeliveryItems();
             const structuredDeliveryItems = deliveryItems.map(( item, index) => ({ 
-                id: item.id,
-                quantity: item.quantity,
+                id: item.id.toNumber(),
+                quantity: item.quantity.toNumber(),
                 quality: item.milkQualityType,
                 vendor: item.vendor,
                 date: new Date(item.date.toNumber() * 1000 ).toLocaleDateString()

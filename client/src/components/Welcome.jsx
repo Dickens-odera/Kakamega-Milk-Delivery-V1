@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 const Welcome = () => {
     const { connectWallet, connectedtAccount } = useContext(MilkDeliveryContext);
     return(
-        <div>
+        <div className="md-3">
             {!connectedtAccount && 
                 <Button onClick={connectWallet}>Connect Wallet</Button>
             }

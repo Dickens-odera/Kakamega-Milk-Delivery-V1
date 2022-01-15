@@ -28,7 +28,7 @@ const NewDeliveryItem = () => {
         );
     }
     return (
-        <div>
+        <div classame="mb-3">
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Quantity</Form.Label>
@@ -49,8 +49,8 @@ const NewDeliveryItem = () => {
                     </Spinner>
                 ) : (
                     <div>
-                            <Button variant="primary" type="submit">
-                                Submit
+                            <Button variant="primary" type="submit" className="mb-3">
+                                Submit Record
                             </Button>
                     </div>
                 )
