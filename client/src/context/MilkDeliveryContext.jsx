@@ -12,20 +12,23 @@ const getMilkDeliveryContract = () => {
     const signer = provider.getSigner();
     const milkDeliveryConract = new ethers.Contract(ContractAddress, ContractABI, signer);
 
+    /** 
     console.log({
         provider,
         signer,
         milkDeliveryConract
-    })
-    setDeliveryContract(milkDeliveryConract);
-    //return milkDeliveryConract;
+    });
+    */
+
+    return milkDeliveryConract;
 }
 
 export const MilkDeliveryProvider = ({ children }) => {
-    const [connectedtAccount, setConnectedAccount ] = useState('');
-    const [formData, setFormData ] = useState({ quantity: '',quality: ''});
-    const [deliveryContract, setDeliveryContract ] = useState('');
+    const [ connectedtAccount, setConnectedAccount ] = useState('');
+    const [ formData, setFormData ] = useState({ quantity: '',quality: ''});
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ milkDeliveryItems, setMilkDeliveryItems ] = useState([]);
+
     const handleChange = (e, name) => {
         setFormData(( prevState ) => ( { ...prevState, [name]: e.target.value}));
     }
@@ -38,7 +41,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
             if (accounts.length) {
                 setConnectedAccount(accounts[0]);
-                //getMilkDeliveries()
+                getMilkDeliveryItems();            
             }
             console.log(accounts);
         }catch(error){
@@ -64,12 +67,42 @@ export const MilkDeliveryProvider = ({ children }) => {
         try{
             if (!ethereum) return alert("Please Install Metamask");
 
-            getMilkDeliveryContract();
+            const milkDeliveryConract = getMilkDeliveryContract();
+            const tx = await milkDeliveryConract.recordNewDelivery(quantity.toString(), quality.toString());
+            
             setIsLoading(true);
-            //const tx = await deliveryContract.recordNewDelivery(quantity, quality);
+            console.log('Loading ....');
+            console.log(tx.hash);
+
+            await tx.wait();
+            console.log('Sucesss ....');
+            console.log(tx.hash);
+            setIsLoading(false);
+
         }catch(error){
             console.error(error);
             //throw new Error("No Ethereum object detected");
+        }
+    }
+
+    const getMilkDeliveryItems = async() => {
+        try{ 
+            if (!ethereum) return alert("Please Install Metamask");
+   
+            const milkDeliveryConract = getMilkDeliveryContract();
+
+            const deliveryItems = await milkDeliveryConract.listAllDeliveryItems();
+            const structuredDeliveryItems = deliveryItems.map(( item, index) => ({ 
+                id: item.id,
+                quantity: item.quantity,
+                quality: item.quality,
+                vendor: item.vemdor,
+                date: new Date(item.date.toNumber() * 1000 ).toLocaleDateString()
+            }));
+            console.log(structuredDeliveryItems);
+            setMilkDeliveryItems(structuredDeliveryItems);
+        }catch(error){  
+            console.error(error);
         }
     }
 
@@ -78,7 +111,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet, connectedtAccount, formData, setFormData, handleChange, addNewDelivery, deliveryContract, isLoading }}>
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedtAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems }}>
             { children }
         </MilkDeliveryContext.Provider>
     );

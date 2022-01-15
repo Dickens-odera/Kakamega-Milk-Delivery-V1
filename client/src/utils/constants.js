@@ -1,4 +1,4 @@
 import abi from './artifacts/MilkDelivery.json';
 
-export const ContractAddress = '0x298D45B68125e1bcA6AF4727981D1c5660540E8C';
+export const ContractAddress = '0x514b3216D23ed4111D97296b0bFC7c2b52d5B5B1';
 export const ContractABI = abi.abi; 

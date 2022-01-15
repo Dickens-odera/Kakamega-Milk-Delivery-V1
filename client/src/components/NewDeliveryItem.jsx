@@ -42,14 +42,17 @@ const NewDeliveryItem = () => {
                     <Input name="quality" placeholder="Enter Quality" type="number" handleChange={handleChange}></Input>
 
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
 
-                {isLoading && (
+                {isLoading ? (
                     <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>
+                ) : (
+                    <div>
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                    </div>
                 )
                 
                 }

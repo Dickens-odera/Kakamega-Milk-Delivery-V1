@@ -208,4 +208,12 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
   function vendorList() public view returns(Vendor[] memory){
     return vendors;
   }
+
+  function listAllDeliveryItems() public view returns(MilkDeliveryItem[] memory){
+    return milkDeliveries;
+  }
+
+  function getTotalDeliveries() public view returns(uint){
+    return totalDeliveries;
+  }
 }
