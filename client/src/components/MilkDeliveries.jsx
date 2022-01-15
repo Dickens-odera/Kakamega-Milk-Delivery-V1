@@ -3,11 +3,14 @@ import { MilkDeliveryContext } from '../context/MilkDeliveryContext';
 
 const MilkDeliveries = () => {
     const { milkDeliveryItems, connectedtAccount } = useContext(MilkDeliveryContext);
+    const deliveryItems = milkDeliveryItems.sort(( a, b) => {
+        return b.id - a.id;
+    });
     return(
         <div className="row">
             {connectedtAccount && 
-                milkDeliveryItems.reverse().map((item, index) => (
-                    <div key={item.id} className="col-md-4 mb-3">
+                deliveryItems.map((item, index) => (
+                    <div key={item.id} className="col-md-3 mb-2">
                         <div className="card">
                             <div className="card-header">
                                 <div className="card-title">Delivery Item: {item.id}</div>
