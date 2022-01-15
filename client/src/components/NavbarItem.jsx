@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, Offcanvas, NavDropdown, Form, FormControl, Butt
 
 const NavbarItem = () => {
     return (
-        <div>
+        <div className="mb-2">
             <Navbar bg="light" expand={false}>
                 <Container fluid>
                     <Navbar.Brand href="#">Kakamega Milk Delivery</Navbar.Brand>
