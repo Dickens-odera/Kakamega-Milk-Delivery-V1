@@ -83,6 +83,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             console.log(tx.hash);
             setIsLoading(false);
             swal("Delivery Item Added Successfully");
+            getMilkDeliveryItems();
         }catch(error){
             swal(error.message);
             console.error(error);
