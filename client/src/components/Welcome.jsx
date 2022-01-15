@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useContext } from 'react';
+import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
 const Welcome = () => {
+    const { connectWallet } = useContext(MilkDeliveryContext);
     return(
         <div>
-            <h1>Welcome</h1>
+            <button onClick={connectWallet}>Connect Wallet</button>
         </div>
     );
 }

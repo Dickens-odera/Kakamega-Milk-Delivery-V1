@@ -15,7 +15,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"totalQuantity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/MilkDeliveryInterface.sol\":\"MilkDeliveryInterface\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/MilkDeliveryInterface.sol\":{\"keccak256\":\"0xbd7e2e59256aaf93b72ea014f4871bec3777931114942c642c04fa2ca0a3f308\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19c1a7376ab2acd525dd23523b473b665009e85ba9e24e86f48a3b4e3c6acd5d\",\"dweb:/ipfs/QmUJrobZDG1w2P8uyfBxPhGK42wLrM1rfv1hkvbdJXWbJy\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"totalQuantity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/D/Dickens/Programming/Blockchain/Projects/Research Projects/MMUST/Dairy Farmers Milk Delivery/contracts/interfaces/MilkDeliveryInterface.sol\":\"MilkDeliveryInterface\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/Dickens/Programming/Blockchain/Projects/Research Projects/MMUST/Dairy Farmers Milk Delivery/contracts/interfaces/MilkDeliveryInterface.sol\":{\"keccak256\":\"0xbd7e2e59256aaf93b72ea014f4871bec3777931114942c642c04fa2ca0a3f308\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19c1a7376ab2acd525dd23523b473b665009e85ba9e24e86f48a3b4e3c6acd5d\",\"dweb:/ipfs/QmUJrobZDG1w2P8uyfBxPhGK42wLrM1rfv1hkvbdJXWbJy\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -24,20 +24,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface MilkDeliveryInterface {\n  function totalQuantity() external view returns(uint);\n}\n",
-  "sourcePath": "D:\\Dickens\\Programming\\Blockchain\\Projects\\Research Projects\\MMUST\\Dairy Farmers Milk Delivery\\contracts\\interfaces\\MilkDeliveryInterface.sol",
+  "sourcePath": "D:/Dickens/Programming/Blockchain/Projects/Research Projects/MMUST/Dairy Farmers Milk Delivery/contracts/interfaces/MilkDeliveryInterface.sol",
   "ast": {
-    "absolutePath": "project:/contracts/interfaces/MilkDeliveryInterface.sol",
+    "absolutePath": "/D/Dickens/Programming/Blockchain/Projects/Research Projects/MMUST/Dairy Farmers Milk Delivery/contracts/interfaces/MilkDeliveryInterface.sol",
     "exportedSymbols": {
       "MilkDeliveryInterface": [
-        1808
+        7
       ]
     },
-    "id": 1809,
+    "id": 8,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1802,
+        "id": 1,
         "literals": [
           "solidity",
           "^",
@@ -45,7 +45,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:12"
+        "src": "32:23:0"
       },
       {
         "abstract": false,
@@ -54,42 +54,42 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1808,
+        "id": 7,
         "linearizedBaseContracts": [
-          1808
+          7
         ],
         "name": "MilkDeliveryInterface",
-        "nameLocation": "67:21:12",
+        "nameLocation": "67:21:0",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "c616f412",
-            "id": 1807,
+            "id": 6,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "totalQuantity",
-            "nameLocation": "102:13:12",
+            "nameLocation": "102:13:0",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1803,
+              "id": 2,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "115:2:12"
+              "src": "115:2:0"
             },
             "returnParameters": {
-              "id": 1806,
+              "id": 5,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1805,
+                  "id": 4,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1807,
-                  "src": "140:4:12",
+                  "scope": 6,
+                  "src": "140:4:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -97,10 +97,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1804,
+                    "id": 3,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "140:4:12",
+                    "src": "140:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -109,35 +109,35 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "139:6:12"
+              "src": "139:6:0"
             },
-            "scope": 1808,
-            "src": "93:53:12",
+            "scope": 7,
+            "src": "93:53:0",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1809,
-        "src": "57:91:12",
+        "scope": 8,
+        "src": "57:91:0",
         "usedErrors": []
       }
     ],
-    "src": "32:117:12"
+    "src": "32:117:0"
   },
   "legacyAST": {
-    "absolutePath": "project:/contracts/interfaces/MilkDeliveryInterface.sol",
+    "absolutePath": "/D/Dickens/Programming/Blockchain/Projects/Research Projects/MMUST/Dairy Farmers Milk Delivery/contracts/interfaces/MilkDeliveryInterface.sol",
     "exportedSymbols": {
       "MilkDeliveryInterface": [
-        1808
+        7
       ]
     },
-    "id": 1809,
+    "id": 8,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1802,
+        "id": 1,
         "literals": [
           "solidity",
           "^",
@@ -145,7 +145,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:12"
+        "src": "32:23:0"
       },
       {
         "abstract": false,
@@ -154,42 +154,42 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1808,
+        "id": 7,
         "linearizedBaseContracts": [
-          1808
+          7
         ],
         "name": "MilkDeliveryInterface",
-        "nameLocation": "67:21:12",
+        "nameLocation": "67:21:0",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "functionSelector": "c616f412",
-            "id": 1807,
+            "id": 6,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "totalQuantity",
-            "nameLocation": "102:13:12",
+            "nameLocation": "102:13:0",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1803,
+              "id": 2,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "115:2:12"
+              "src": "115:2:0"
             },
             "returnParameters": {
-              "id": 1806,
+              "id": 5,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1805,
+                  "id": 4,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1807,
-                  "src": "140:4:12",
+                  "scope": 6,
+                  "src": "140:4:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -197,10 +197,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1804,
+                    "id": 3,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "140:4:12",
+                    "src": "140:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -209,21 +209,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "139:6:12"
+              "src": "139:6:0"
             },
-            "scope": 1808,
-            "src": "93:53:12",
+            "scope": 7,
+            "src": "93:53:0",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1809,
-        "src": "57:91:12",
+        "scope": 8,
+        "src": "57:91:0",
         "usedErrors": []
       }
     ],
-    "src": "32:117:12"
+    "src": "32:117:0"
   },
   "compiler": {
     "name": "solc",
@@ -231,7 +231,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-01-05T21:01:10.995Z",
+  "updatedAt": "2022-01-15T13:15:16.930Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Navbar, Footer, MilkDeliveries, MilkDeliveryItem, Welcome } from './components';
+import { useState } from 'react';
+import { Navbar, Footer, MilkDeliveries, MilkDeliveryItem, Welcome, NewDeliveryItem } from './components';
 
 const App = () =>  {
 
@@ -9,10 +9,11 @@ const App = () =>  {
         <Navbar />
         <Welcome />
       </div>
+      <NewDeliveryItem />
       <MilkDeliveries />
       <Footer />
     </div>
-  )
+  );
 }
 
 export default App

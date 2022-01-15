@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import { MilkDeliveryProvider } from './context/MilkDeliveryContext';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <MilkDeliveryProvider >
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  </MilkDeliveryProvider>,
   document.getElementById('root')
 )
