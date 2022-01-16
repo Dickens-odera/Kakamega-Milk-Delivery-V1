@@ -22,15 +22,16 @@ const NewVendor = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const { name, email, address, factory } = vendorFormData;
+        const { name, email, address, factory, isApproved } = vendorFormData;
         console.log({
             name,
             email,
             address,
-            factory
+            factory,
+            isApproved
         });
 
-        if(!name || !email || !address || !factory) return;
+        if (!name || !email || !address || !factory || !isApproved) return;
         await listVendor();
     }
 
@@ -62,10 +63,16 @@ const NewVendor = () => {
 
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>Milk Fatcory Name</Form.Label>
+                                        <Form.Label>Milk Factory Name</Form.Label>
                                         {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
                                         <Input name="factory" placeholder="Enter Vendor Milk Factory" type="text" handleChange={handleChange}></Input>
 
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label style={{ color:"red"}}>Do You Want To Approve this Vendor for Milk Vending?</Form.Label><br></br>
+                                        {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
+                                        <input name="isApproved" type="radio" handleChange={handleChange} value="yes"></input> Yes <br></br>
+                                        <input name="isApproved" type="radio" handleChange={handleChange} value="no"></input> No
                                     </Form.Group>
 
                                     {isLoading ? (
@@ -74,8 +81,8 @@ const NewVendor = () => {
                                         </Spinner>
                                     ) : (
                                         <div>
-                                            <Button variant="primary" type="submit" className="mb-3">
-                                                Add Vendor
+                                            <Button variant="success" type="submit" className="mb-3">
+                                                List New Vendor
                                             </Button>
                                         </div>
                                     )

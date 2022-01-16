@@ -21,7 +21,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ formData, setFormData ] = useState({ quantity: '',quality: ''});
     const [ isLoading, setIsLoading ] = useState(false);
     const [ milkDeliveryItems, setMilkDeliveryItems ] = useState([]);
-    const [ vendorFormData, setVendorFormData ] = useState({ name:'', email:'', factory:' ', address:' '});
+    const [vendorFormData, setVendorFormData] = useState({ name: '', email: '', factory: ' ', address: ' ', isApproved:''});
     const [ contractOwner, setContractOwner ] = useState('');
     const [ vendorFormAddress, setVendorFormAddress ] = useState({ address:''});
 
@@ -135,7 +135,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     }
     
     const listVendor = async () => {
-        const { name, email, address, factory } = vendorFormData;
+        const { name, email, address, factory, isApproved } = vendorFormData;
 
         try{
             if (!ethereum) return alert("Please Install Metamask");
@@ -144,6 +144,10 @@ export const MilkDeliveryProvider = ({ children }) => {
             if(!ethers.utils.isAddress(address)) return swal("Invalid Ethereum Address");
             const tx = await milkDeliveryContract.listNewVendor(address, factory, name, email);
             
+            if (isApproved === "yes"){
+                approveVendor(address);
+            }
+
             setIsLoading(true);
             console.log('Loading ....');
             console.log(tx.hash);
