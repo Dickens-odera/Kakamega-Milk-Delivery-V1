@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavbarItem, Footer, MilkDeliveries, MilkDeliveryItem, Welcome, NewDeliveryItem } from './components';
+import { NavbarItem, Footer, MilkDeliveries, MilkDeliveryItem, Welcome, NewDeliveryItem, NewVendor } from './components';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const App = () =>  {
