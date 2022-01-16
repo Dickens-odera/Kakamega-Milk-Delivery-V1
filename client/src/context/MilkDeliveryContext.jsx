@@ -2,19 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import swal from 'sweetalert';
 
-import { ContractABI, ContractAddress } from '../utils/constants';
+import { LocalContractABI, LocalContractAddress, RinkebyContractAddress, RinkebyContractABI} from '../utils/constants';
 
 export const MilkDeliveryContext = React.createContext();
 
 const { ethereum } = window;
-
-const getMilkDeliveryContract = () => {
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    const signer = provider.getSigner();
-    const milkDeliveryConract = new ethers.Contract(ContractAddress, ContractABI, signer);
-
-    return milkDeliveryConract;
-}
+const rinkebyNetworkId = 4;
 
 export const MilkDeliveryProvider = ({ children }) => {
     const [ connectedAccount, setConnectedAccount ] = useState('');
@@ -24,6 +17,20 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [vendorFormData, setVendorFormData] = useState({ name: '', email: '', factory: ' ', address: ' ', isApproved:''});
     const [ contractOwner, setContractOwner ] = useState('');
     const [ vendorFormAddress, setVendorFormAddress ] = useState({ address:''});
+    const [ networkId, setNetworkId ] = useState();
+
+    const getMilkDeliveryContract = () => {
+        let milkDeliveryConract;
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+
+        if (networkId === rinkebyNetworkId) {
+            milkDeliveryConract = new ethers.Contract(RinkebyContractAddress, RinkebyContractABI, signer);
+        }else {
+            milkDeliveryConract = new ethers.Contract(LocalContractAddress, LocalContractABI, signer);
+        }
+        return milkDeliveryConract;
+    }
 
     const handleChange = (e, name) => {
         setFormData(( prevState ) => ( { ...prevState, [name]: e.target.value}));
@@ -40,6 +47,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             if (accounts.length) {
                 setConnectedAccount(accounts[0]);
                 getContractOwnerAddress();
+                detectChangeInNetwork();
                 getMilkDeliveryItems();
                 getWalletAddress();            
             }
@@ -57,6 +65,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             setConnectedAccount(accounts[0]);
             getContractOwnerAddress();
             getWalletAddress();
+            detectChangeInNetwork();
             getMilkDeliveryItems();
         }catch(error){
             console.error(error);
@@ -192,15 +201,25 @@ export const MilkDeliveryProvider = ({ children }) => {
         })
     }
 
+    const detectChangeInNetwork = async() => {
+        ethereum.on('networkChanged', async(networkId) => {
+            console.log("Network ID",networkId);
+            setNetworkId(networkId);
+            window.location.reload();
+        });
+    }
+
     useEffect(() => {
         checkIfWalletIsConnected();
-        detectAccountChange();
+        setTimeout(() => {
+            detectAccountChange();
+            detectChangeInNetwork();
+        }, 3000);
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, 
-            handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
-            listVendor, contractOwner, vendorFormAddress, approveVendor }}>
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
+            listVendor, contractOwner, vendorFormAddress, approveVendor,networkId }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
