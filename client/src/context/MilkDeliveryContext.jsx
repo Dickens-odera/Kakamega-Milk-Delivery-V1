@@ -23,10 +23,12 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ milkDeliveryItems, setMilkDeliveryItems ] = useState([]);
     const [ vendorFormData, setVendorFormData ] = useState({ name:'', email:'', factory:' ', address:' '});
     const [ contractOwner, setContractOwner ] = useState('');
+    const [ vendorFormAddress, setVendorFormAddress ] = useState({ address:''});
 
     const handleChange = (e, name) => {
         setFormData(( prevState ) => ( { ...prevState, [name]: e.target.value}));
         setVendorFormData(( prevState) => ({ ...prevState, [name]: e.target.value }));
+        setVendorFormAddress(( prevState) => ({...prevState, [name]: e.target.value}));
     }
 
     const checkIfWalletIsConnected = async() => {
@@ -141,7 +143,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             const milkDeliveryContract = getMilkDeliveryContract();
             if(!ethers.utils.isAddress(address)) return swal("Invalid Ethereum Address");
             const tx = await milkDeliveryContract.listNewVendor(address, factory, name, email);
-            console.log(tx);
+            
             setIsLoading(true);
             console.log('Loading ....');
             console.log(tx.hash);
@@ -161,16 +163,40 @@ export const MilkDeliveryProvider = ({ children }) => {
     }
 
     const approveVendor = async() => {
+        const { address } = vendorFormAddress;
+        try{
+            if(!ethereum) return alert("Please Install Metamask");
+            const milkDeliveryConract = getMilkDeliveryContract();
+            if(!ethers.utils.isAddress(address)) return swal("Invalid Ethereum Address");
+            const tx = await milkDeliveryConract.approveVendor(address);
+            setIsLoading(true);
 
+            await tx.wait();
+
+            setIsLoading(false);
+            swal("Vendor Approved Successfully");
+        }catch(error){
+            swal(error.message);
+            console.log(error);
+        }
+    }
+
+    const detectAccountChange = async() => {
+        ethereum.on('accountsChanged', async(accounts) => {
+            await setConnectedAccount(accounts[0]);
+            await getWalletAddress();
+        })
     }
 
     useEffect(() => {
         checkIfWalletIsConnected();
+        detectAccountChange();
     },[]);
 
     return (
         <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, 
-            handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, listVendor, contractOwner }}>
+            handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
+            listVendor, contractOwner, vendorFormAddress, approveVendor }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
