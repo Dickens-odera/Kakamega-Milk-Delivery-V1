@@ -2,7 +2,7 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 require("dotenv").config();
 
 const MNEMONIC = process.env.MNEMONIC;
-const PROJECT_ID = process.env.INFURA_PROJECT_ID;
+const ALCHEMY_APP_URL = process.env.ALCHEMY_APP_URL;
 module.exports = {
   networks: {
     development: {
@@ -17,7 +17,7 @@ module.exports = {
     },
 
     rinkeby: {
-    provider: () => new HDWalletProvider(MNEMONIC, `https://rinkeby.infura.io/v3/${PROJECT_ID}`),
+      provider: () => new HDWalletProvider(MNEMONIC, `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_APP_URL}`),
     network_id: 4,
     gas: 5500000,        // Ropsten has a lower block limit than mainnet
     confirmations: 2,    // # of confs to wait between deployments. (default: 0)
