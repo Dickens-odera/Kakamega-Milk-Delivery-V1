@@ -21,9 +21,12 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ formData, setFormData ] = useState({ quantity: '',quality: ''});
     const [ isLoading, setIsLoading ] = useState(false);
     const [ milkDeliveryItems, setMilkDeliveryItems ] = useState([]);
+    const [ vendorFormData, setVendorFormData ] = useState({ name:'', email:'', factory:' ', address:' '});
+    const [ contractOwner, setContractOwner ] = useState('');
 
     const handleChange = (e, name) => {
         setFormData(( prevState ) => ( { ...prevState, [name]: e.target.value}));
+        setVendorFormData(( prevState) => ({ ...prevState, [name]: e.target.value }));
     }
 
     const checkIfWalletIsConnected = async() => {
@@ -34,7 +37,9 @@ export const MilkDeliveryProvider = ({ children }) => {
 
             if (accounts.length) {
                 setConnectedAccount(accounts[0]);
-                getMilkDeliveryItems();            
+                getContractOwnerAddress();
+                getMilkDeliveryItems();
+                getWalletAddress();            
             }
             console.log(accounts);
         }catch(error){
@@ -48,11 +53,33 @@ export const MilkDeliveryProvider = ({ children }) => {
             if (!ethereum) return alert("Please Install Metamask");
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             setConnectedAccount(accounts[0]);
+            getContractOwnerAddress();
+            getWalletAddress();
             getMilkDeliveryItems();
         }catch(error){
             console.error(error);
             
             throw new Error("No Ethereum object detected");
+        }
+    }
+
+    const getWalletAddress = async () => {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = await provider.getSigner();
+        const userAddress = await signer.getAddress();
+        console.log("Connected Address", userAddress);
+        //return userAddress;
+        setConnectedAccount(userAddress);
+    }
+
+    const getContractOwnerAddress = async() => {
+        try{
+            const milkDeliveryConract = getMilkDeliveryContract();
+            const owner = await milkDeliveryConract.owner();
+            console.log("Owner Address", owner);
+            setContractOwner(owner);
+        }catch(error){
+            console.error(error);
         }
     }
 
@@ -104,13 +131,46 @@ export const MilkDeliveryProvider = ({ children }) => {
             console.error(error);
         }
     }
+    
+    const listVendor = async () => {
+        const { name, email, address, factory } = vendorFormData;
+
+        try{
+            if (!ethereum) return alert("Please Install Metamask");
+
+            const milkDeliveryContract = getMilkDeliveryContract();
+            if(!ethers.utils.isAddress(address)) return swal("Invalid Ethereum Address");
+            const tx = await milkDeliveryContract.listNewVendor(address, factory, name, email);
+            console.log(tx);
+            setIsLoading(true);
+            console.log('Loading ....');
+            console.log(tx.hash);
+
+            await tx.wait();
+
+            console.log('Sucesss ....');
+            console.log(tx.hash);
+            setIsLoading(false);
+            swal("New Vendor Added Successfully");
+
+        }catch(error){
+            console.error(error);
+            swal(error.message);
+            throw new Error("No Ethereum object detected");
+        }
+    }
+
+    const approveVendor = async() => {
+
+    }
 
     useEffect(() => {
         checkIfWalletIsConnected();
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems }}>
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, 
+            handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, listVendor, contractOwner }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
