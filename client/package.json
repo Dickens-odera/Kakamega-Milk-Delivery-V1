@@ -1,10 +1,7 @@
 {
-  "homepage":"https://Dickens-odera.github.io/Kakamega-Milk-Delivery-V1",
   "name": "client",
   "version": "0.0.0",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
