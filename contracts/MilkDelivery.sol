@@ -64,8 +64,6 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
   event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date); //address[] indexed approvedVendors
   event MilkVendorDelisted(address indexed vendor, address indexed caller, uint date);
 
-  error BadRecord();
-
   constructor() public {
   }
 
