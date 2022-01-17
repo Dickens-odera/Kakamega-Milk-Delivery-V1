@@ -158,8 +158,9 @@ export const MilkDeliveryProvider = ({ children }) => {
             if (!ethereum) return alert("Please Install Metamask");
 
             const milkDeliveryContract = getMilkDeliveryContract();
-            if(!ethers.utils.isAddress(address)) return swal("Invalid Ethereum Address, Please enter a valid address");
-            const tx = await milkDeliveryContract.listNewVendor(address, factory, name, email);
+            const validAddress = ethers.utils.getAddress(address);
+            if (!ethers.utils.isAddress(validAddress)) return swal("Invalid Ethereum Address, Please enter a valid address");
+            const tx = await milkDeliveryContract.listNewVendor(validAddress, factory, name, email);
             
             if (isApproved === "yes"){
                 approveVendor(address);
@@ -188,8 +189,9 @@ export const MilkDeliveryProvider = ({ children }) => {
         try{
             if(!ethereum) return alert("Please Install Metamask");
             const milkDeliveryConract = getMilkDeliveryContract();
-            if(!ethers.utils.isAddress(address)) return swal("Invalid Ethereum Address");
-            const tx = await milkDeliveryConract.approveVendor(address);
+            const validVendorAddress = ethers.utils.getAddress(address);
+            if (!ethers.utils.isAddress(validVendorAddress)) return swal("Invalid Ethereum Address, Please enter a valid address");
+            const tx = await milkDeliveryConract.approveVendor(validVendorAddress);
             setIsLoading(true);
 
             await tx.wait();
