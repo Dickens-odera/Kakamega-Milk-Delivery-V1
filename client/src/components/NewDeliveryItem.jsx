@@ -6,12 +6,13 @@ import NewVendor from './NewVendor';
 
 const NewDeliveryItem = () => {
     const { handleChange, formData, addNewDelivery, isLoading, connectedAccount } = useContext(MilkDeliveryContext);
+    const { quantity, quality } = formData;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { quantity, quality } = formData;
 
         if (!quantity || !quality) return;
+        if (quality > 3) return swal("Invalid Quality Type: Please Chose either:0-GOOD, 1-STALE, 2- PERFECT, 3-BAD");
         console.log(quantity);
         addNewDelivery();
     }
@@ -44,13 +45,13 @@ const NewDeliveryItem = () => {
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Quantity</Form.Label>
                                         {/* <Form.Control type="number" name="quantity" placeholder="Enter Milk Quantity"/> */}
-                                        <Input name="quantity" placeholder="Enter Quantity" type="number" handleChange={handleChange}></Input>
+                                        <Input name="quantity" placeholder="Enter Quantity" type="number" handleChange={handleChange} value={quantity}></Input>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Quality</Form.Label>
                                         {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
-                                        <Input name="quality" placeholder="Enter Quality" type="number" handleChange={handleChange}></Input>
+                                        <Input name="quality" placeholder="Enter Quality" type="number" handleChange={handleChange} value={quality}></Input>
 
                                     </Form.Group>
 

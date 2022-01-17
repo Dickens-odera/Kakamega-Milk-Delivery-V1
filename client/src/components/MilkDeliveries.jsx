@@ -18,7 +18,20 @@ const MilkDeliveries = () => {
                             <div className="card-body">
                                 <p>Date: {item.date}</p>
                                 <p>Vendor: {item.vendor}</p>
-                                <p>Quality: {item.quality}</p>
+                                <p>Quality: {
+                                    item.quality === 0 && "GOOD"
+                                }
+                                {
+                                    item.quality === 1 && "STALE"
+                                }
+                                {
+                                    item.quality === 2 && "PERFECT"
+                                } 
+                                {
+                                    item.quality === 3 && "BAD"
+                                
+                                }
+                                </p>
                                 <p>Quantity: {item.quantity}</p>
                             </div>
                         </div>

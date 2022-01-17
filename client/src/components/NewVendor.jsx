@@ -4,7 +4,8 @@ import { Container, Row, Form, Spinner, Button } from 'react-bootstrap';
 //import Input from './Input';
 
 const NewVendor = () => {
-    const { connectedAccount, vendorFormData, listVendor, handleChange, contractOwner, isLoading } = useContext(MilkDeliveryContext);
+    const { connectedAccount, vendorFormData, listVendor, handleChange, contractOwner, isFormLoading } = useContext(MilkDeliveryContext);
+    const { name, email, address, factory, isApproved } = vendorFormData;
 
     const Input = ({ placeholder, type, name, value, handleChange }) => {
         return (
@@ -22,7 +23,6 @@ const NewVendor = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const { name, email, address, factory, isApproved } = vendorFormData;
         console.log({
             name,
             email,
@@ -31,7 +31,7 @@ const NewVendor = () => {
             isApproved
         });
 
-        if (!name || !email || !address || !factory || !isApproved) return;
+        if (!name || !email || !address || !factory) return;
         await listVendor();
     }
 
@@ -47,25 +47,25 @@ const NewVendor = () => {
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Name</Form.Label>
                                 {/* <Form.Control type="text" name="name" placeholder="Enter vendor Name" handleChange={handleChange}/> */}
-                                        <Input name="name" placeholder="Enter Vendor Name" type="text" handleChange={handleChange} ></Input>
+                                <Input name="name" placeholder="Enter Vendor Name" type="text" handleChange={handleChange} value={name}></Input>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Email</Form.Label>
                                         {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
-                                        <Input name="email" placeholder="Enter Vendor Email" type="email" handleChange={handleChange}></Input>
+                                <Input name="email" placeholder="Enter Vendor Email" type="email" handleChange={handleChange} value={email}></Input>
 
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Ethereum Address</Form.Label>
                                         {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
-                                        <Input name="address" placeholder="Enter Vendor Walllet Address" type="text" handleChange={handleChange}></Input>
+                                <Input name="address" placeholder="Enter Vendor Walllet Address" type="text" handleChange={handleChange} value={address}></Input>
 
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Milk Factory Name</Form.Label>
                                         {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
-                                        <Input name="factory" placeholder="Enter Vendor Milk Factory" type="text" handleChange={handleChange}></Input>
+                                        <Input name="factory" placeholder="Enter Vendor Milk Factory" type="text" handleChange={handleChange} value={factory}></Input>
 
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -75,7 +75,7 @@ const NewVendor = () => {
                                         <input name="isApproved" type="radio" handleChange={handleChange} value="no"></input> No
                                     </Form.Group>
 
-                                    {isLoading ? (
+                            {isFormLoading ? (
                                         <Spinner animation="border" role="status">
                                             <span className="visually-hidden">Loading...</span>
                                         </Spinner>
