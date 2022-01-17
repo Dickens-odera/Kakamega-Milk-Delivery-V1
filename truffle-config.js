@@ -3,6 +3,8 @@ require("dotenv").config();
 
 const MNEMONIC = process.env.MNEMONIC;
 const ALCHEMY_APP_URL = process.env.ALCHEMY_APP_URL;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
+
 module.exports = {
   networks: {
     development: {
@@ -47,6 +49,14 @@ module.exports = {
     }
   },
 
+  plugins:[
+    'truffle-plugin-verify'
+  ],
+  
+  api_keys:{
+    etherscan: ETHERSCAN_API_KEY
+  },
+  
   db: {
     enabled: false
   }

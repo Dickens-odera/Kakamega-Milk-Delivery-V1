@@ -20,16 +20,18 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ networkId, setNetworkId ] = useState();
 
     const getMilkDeliveryContract = () => {
-        let milkDeliveryConract;
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-
+        const milkDeliveryConract = new ethers.Contract(RinkebyContractAddress, RinkebyContractABI, signer);
+        return milkDeliveryConract;
+        /*
         if (networkId === rinkebyNetworkId) {
             milkDeliveryConract = new ethers.Contract(RinkebyContractAddress, RinkebyContractABI, signer);
         }else {
             milkDeliveryConract = new ethers.Contract(LocalContractAddress, LocalContractABI, signer);
         }
         return milkDeliveryConract;
+        */
     }
 
     const handleChange = (e, name) => {
