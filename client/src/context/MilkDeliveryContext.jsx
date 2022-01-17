@@ -20,6 +20,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ vendorFormAddress, setVendorFormAddress ] = useState({ address:''});
     const [ networkId, setNetworkId ] = useState();
     const [ milkQualityTypes, setMilkQualityTypes ] = useState([]);
+    const [ isConnectedToRinkeby, setIsConnectedToRinkeby] = useState(false);
 
     const getMilkDeliveryContract = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -82,7 +83,6 @@ export const MilkDeliveryProvider = ({ children }) => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = await provider.getSigner();
         const userAddress = await signer.getAddress();
-        console.log("Connected Address", userAddress);
         //return userAddress;
         setConnectedAccount(userAddress);
     }
@@ -91,7 +91,6 @@ export const MilkDeliveryProvider = ({ children }) => {
         try{
             const milkDeliveryConract = getMilkDeliveryContract();
             const owner = await milkDeliveryConract.owner();
-            console.log("Owner Address", owner);
             setContractOwner(owner);
         }catch(error){
             console.error(error);
@@ -213,8 +212,13 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     const detectChangeInNetwork = async() => {
         ethereum.on('networkChanged', async(networkId) => {
-            console.log("Network ID",networkId);
-            setNetworkId(networkId);
+            const network = await ethers.providers.getNetwork(networkId);
+            console.log("ChainID: ", network.chainId);
+            if (network.chainId === rinkebyNetworkId){
+                setIsConnectedToRinkeby(true);
+            }
+            console.log("Network ID", network.chainId);
+            setNetworkId(network.chainId);
             window.location.reload();
         });
     }
@@ -244,7 +248,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     return (
         <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
-            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading }}>
+            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
