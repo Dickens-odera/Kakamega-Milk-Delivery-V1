@@ -212,14 +212,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     const detectChangeInNetwork = async() => {
         ethereum.on('networkChanged', async(networkId) => {
-            const network = await ethers.providers.getNetwork(networkId);
-            console.log("ChainID: ", network.chainId);
-            if (network.chainId === rinkebyNetworkId){
-                setIsConnectedToRinkeby(true);
-            }
-            console.log("Network ID", network.chainId);
-            setNetworkId(network.chainId);
-            window.location.reload();
+            setNetworkId(networkId);
         });
     }
 
@@ -240,10 +233,8 @@ export const MilkDeliveryProvider = ({ children }) => {
     useEffect(() => {
         checkIfWalletIsConnected();
         getMilkQualityTypes();
-        setTimeout(() => {
-            detectAccountChange();
-            detectChangeInNetwork();
-        }, 3000);
+        detectAccountChange();
+        detectChangeInNetwork();
     },[]);
 
     return (
