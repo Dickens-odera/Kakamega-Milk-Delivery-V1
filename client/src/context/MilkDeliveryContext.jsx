@@ -211,8 +211,8 @@ export const MilkDeliveryProvider = ({ children }) => {
     }
 
     const detectChangeInNetwork = async() => {
-        ethereum.on('networkChanged', async(networkId) => {
-            setNetworkId(networkId);
+        ethereum.on('chainChanged', async(chainId) => {
+            setNetworkId(chainId);
         });
     }
 
@@ -238,7 +238,8 @@ export const MilkDeliveryProvider = ({ children }) => {
     },[]);
 
     return (
-        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
+        <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, 
+            milkDeliveryItems, vendorFormData, 
             listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby }}>
             { children }
         </MilkDeliveryContext.Provider>
