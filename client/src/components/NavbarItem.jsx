@@ -1,46 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Navbar, Container, Nav, Offcanvas, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-
+import { MilkDeliveryContext } from '../context/MilkDeliveryContext';
 
 const NavbarItem = () => {
+
+    const { connectedAccount } = useContext(MilkDeliveryContext);
     return (
         <div className="mb-2">
-            <Navbar bg="light" expand={false}>
-                <Container fluid>
-                    <Navbar.Brand href="#">Kakamega Milk Delivery Blockchain DApp</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="offcanvasNavbar" />
-                    <Navbar.Offcanvas
-                        id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel"
-                        placement="end"
-                    >
-                        <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-                            <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Nav.Link href="#action1">Home</Nav.Link>
-                                <Nav.Link href="#action2">Link</Nav.Link>
-                                <NavDropdown title="Dropdown" id="offcanvasNavbarDropdown">
-                                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action5">
-                                        Something else here
-                                    </NavDropdown.Item>
-                                </NavDropdown>
-                            </Nav>
-                            <Form className="d-flex">
-                                <FormControl
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-success">Search</Button>
-                            </Form>
-                        </Offcanvas.Body>
-                    </Navbar.Offcanvas>
+            <Navbar bg="dark" expand="lg" variant="dark">
+                <Container>
+                    <Navbar.Brand href="#home">Kakamega County Blockchain Milk Delivery DAPP</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href="#home">Home</Nav.Link>
+                            <Nav.Link href="#link">Delivery Records</Nav.Link>
+                            <Nav.Link href="#link">Approved Vendors</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                    <Nav.Link>
+                        {`${connectedAccount.slice(0, 5)}...${connectedAccount.slice(connectedAccount.length - 6)}`}
+                    </Nav.Link>
                 </Container>
             </Navbar>
         </div>
