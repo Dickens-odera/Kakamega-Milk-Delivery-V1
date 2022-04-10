@@ -68,12 +68,12 @@ const NewVendor = () => {
                                         <Input name="factory" placeholder="Enter Vendor Milk Factory" type="text" handleChange={handleChange} value={factory}></Input>
 
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    {/* <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label style={{ color:"red"}}>Do You Want To Approve this Vendor for Milk Vending?</Form.Label><br></br>
-                                        {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
+                                        <Form.Control type="text" name="quality" placeholder="Select Quality"/>
                                         <input name="isApproved" type="radio" handleChange={handleChange} value="yes"></input> Yes <br></br>
                                         <input name="isApproved" type="radio" handleChange={handleChange} value="no"></input> No
-                                    </Form.Group>
+                                    </Form.Group> */}
 
                             {isFormLoading ? (
                                         <Spinner animation="border" role="status">
