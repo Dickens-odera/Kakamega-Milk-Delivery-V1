@@ -39,6 +39,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     uint id;
     uint date;
     uint quantity;
+    uint farmerId;
     MILK_QUALITY_TYPE milkQualityType;
   }
 
@@ -77,6 +78,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
   mapping(uint => Vendor) public vendorById; //a mapping of the vebdor id to the struct item
   mapping(uint => MilkDeliveryItem) public deliveryItemById; // a mapping of the delivery item  by it's id
   mapping(uint => Farmer) public farmerById;
+  mapping(uint => bool) public isAnExistingFarmer;
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
   event NewMilkVendorAdded(address indexed vendor, address indexed addedBy, uint indexed date);
@@ -111,6 +113,15 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     _;
   }
 
+  modifier farmerNotListed(address _farmerAddress){
+    require(isFarmerListed[_farmerAddress] == false,"This Farmer is Listed");
+    _;
+  }
+   
+   modifier farmerExists(uint _farmerId){
+     require(isAnExistingFarmer[_farmerId] == true,"Farmer ID does not exist");
+     _;
+   }
   /**
     * @dev approves a vendor for milk delivery, only performed by the contract owner
     * @param _vendor address
@@ -165,15 +176,16 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     * @param _quantity uint
     * @param _qualityType enum
    */
-  function recordNewDelivery(uint _quantity, MILK_QUALITY_TYPE _qualityType) public 
+  function recordNewDelivery(uint _quantity, MILK_QUALITY_TYPE _qualityType, uint _farmerId) public 
   isListedAsAvendor(msg.sender) 
   isApprovedForVending(msg.sender) 
+  farmerExists(_farmerId)
   returns(bool)
   {
     require( _quantity != 0,"New Milk Delivery Item: => Zero Quantity Not Accepted");
     milkDeliveryIds.increment();
     uint currentDeliveryId = milkDeliveryIds.current();
-    MilkDeliveryItem memory newMilkDeliveryItem = MilkDeliveryItem(payable(msg.sender),currentDeliveryId, block.timestamp,_quantity,_qualityType);
+    MilkDeliveryItem memory newMilkDeliveryItem = MilkDeliveryItem(payable(msg.sender),currentDeliveryId, block.timestamp,_quantity,_farmerId,_qualityType);
     milkDeliveries.push(newMilkDeliveryItem);
     deliveryItemByVendor[msg.sender] = newMilkDeliveryItem;
     vendorQuantityByDate[msg.sender][block.timestamp] = _quantity;
@@ -244,7 +256,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     bytes memory _phoneNumber,
     bytes memory _email,
     int _idNumber
-    ) public {
+    ) public farmerNotListed(_farmerAddress) {
       farmerIds.increment();
       uint currentFarmerId = farmerIds.current();
       Farmer memory newFarmer = Farmer(currentFarmerId,_firstName,_lastName,_email,_phoneNumber,_idNumber,_location,payable(_farmerAddress), block.timestamp);
@@ -253,5 +265,9 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
       farmers.push(newFarmer);
       farmerById[currentFarmerId] = newFarmer;
       emit NewFarmer(_farmerAddress,currentFarmerId, block.timestamp);
+  }
+
+  function getFarmerById(uint _farmerId) public view returns(Farmer memory){
+    return farmerById[_farmerId];
   }
 }
