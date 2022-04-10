@@ -256,7 +256,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     bytes memory _phoneNumber,
     bytes memory _email,
     int _idNumber
-    ) public farmerNotListed(_farmerAddress) {
+    ) public farmerNotListed(_farmerAddress) returns(bool success){
       farmerIds.increment();
       uint currentFarmerId = farmerIds.current();
       Farmer memory newFarmer = Farmer(currentFarmerId,_firstName,_lastName,_email,_phoneNumber,_idNumber,_location,payable(_farmerAddress), block.timestamp);
@@ -265,6 +265,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
       farmers.push(newFarmer);
       farmerById[currentFarmerId] = newFarmer;
       emit NewFarmer(_farmerAddress,currentFarmerId, block.timestamp);
+      return true;
   }
 
   function getFarmerById(uint _farmerId) public view returns(Farmer memory){
