@@ -161,9 +161,9 @@ export const MilkDeliveryProvider = ({ children }) => {
             if (!ethers.utils.isAddress(validAddress)) return swal("Invalid Ethereum Address, Please enter a valid address");
             const tx = await milkDeliveryContract.listNewVendor(validAddress, factory, name, email);
             
-            if (isApproved === "yes"){
-                approveVendor(address);
-            }
+            // if (isApproved === "yes"){
+                
+            // }
 
             setIsFormLoading(true);
             console.log('Loading ....');
@@ -174,6 +174,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             console.log('Sucesss ....');
             console.log(tx.hash);
             setIsFormLoading(false);
+            approveVendor(address);
             swal("New Vendor Added Successfully");
 
         }catch(error){
