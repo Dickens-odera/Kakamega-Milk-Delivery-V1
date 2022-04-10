@@ -16,6 +16,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
 
   Counters.Counter private milkDeliveryIds; //to help track milk delivery items by ID e.g 1
   Counters.Counter private vendorIds; //to help track vendors by ID e.g 1
+  Counters.Counter private farmerIds;
 
   enum MILK_QUALITY_TYPE { GOOD, STALE, PERFECT, BAD } //quality types
   MILK_QUALITY_TYPE public milkQualityType; //in order to access the enum via a variable
@@ -41,28 +42,47 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     MILK_QUALITY_TYPE milkQualityType;
   }
 
+  struct Farmer{
+    uint id;
+    string firstName;
+    string lastName;
+    bytes email;
+    bytes phoneNumber;
+    int idNumber;
+    bytes location;
+    address payable farmerAddress;
+    uint createdAt;
+  }
+
   uint public totalVendors = 0; //total vendors initialised to 0
   uint public totalQuantities = 0; //keeps track of total milk quantity recorded on-chain
   uint public totalDeliveries = 0; //to handle incrementing of overral milk quantities
   uint public totalApprovedVendors = 0; // shall be incremented and decremented accordingly
 
+  uint public totalFarmers = 0;
+
   Vendor[] public vendors; //an array of the vendors
   MilkDeliveryItem[] public milkDeliveries; //to help keep track of delivery items as an array
   address[] public approvedVendors; //the addresses of the approved vendors
   
+  Farmer[] public farmers;
+
   mapping(address => bool) public isApprovedForMilkVending; //a boolean indicating whether a vendor has been approved
   mapping(address => MilkDeliveryItem) public deliveryItemByVendor; //get the delivery item by vendor identified by an address
   mapping(address => mapping(uint => uint)) public vendorQuantityByDate; //keeps track of the total quantity of the vendor by date [address][date][quantity]
   mapping(address => Vendor) public vendorsByUser; //who added thie vendor item
   mapping(address => bool) public isVendorListed; //to show whether this address is listed as a vendor or not
+  mapping(address => bool) public isFarmerListed;
 
   mapping(uint => Vendor) public vendorById; //a mapping of the vebdor id to the struct item
   mapping(uint => MilkDeliveryItem) public deliveryItemById; // a mapping of the delivery item  by it's id
+  mapping(uint => Farmer) public farmerById;
 
   event NewMilkDeliveryRecorded(address indexed vendor, uint indexed quantity, MILK_QUALITY_TYPE indexed quality, uint date);
   event NewMilkVendorAdded(address indexed vendor, address indexed addedBy, uint indexed date);
   event MilkVendorDisapproved(address indexed vendor, address indexed caller, uint date); //address[] indexed approvedVendors
   event MilkVendorDelisted(address indexed vendor, address indexed caller, uint date);
+  event NewFarmer(address indexed farmerAddress, uint id, uint dateAdded );
 
   constructor() public {
   }
@@ -214,5 +234,24 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
 
   function getTotalDeliveries() public view returns(uint){
     return totalDeliveries;
+  }
+
+  function addNewFarmer(
+    address _farmerAddress,
+    string memory _firstName, 
+    string memory _lastName, 
+    bytes memory _location,
+    bytes memory _phoneNumber,
+    bytes memory _email,
+    int _idNumber
+    ) public {
+      farmerIds.increment();
+      uint currentFarmerId = farmerIds.current();
+      Farmer memory newFarmer = Farmer(currentFarmerId,_firstName,_lastName,_email,_phoneNumber,_idNumber,_location,payable(_farmerAddress), block.timestamp);
+      totalFarmers = totalFarmers.add(1);
+      isFarmerListed[_farmerAddress] = true;
+      farmers.push(newFarmer);
+      farmerById[currentFarmerId] = newFarmer;
+      emit NewFarmer(_farmerAddress,currentFarmerId, block.timestamp);
   }
 }
