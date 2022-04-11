@@ -63,6 +63,7 @@ const Farmers = () => {
               </div>
 
               <div>
+                <Link to="/new">
                 <Button
                   variant="primary"
                   style={{
@@ -73,6 +74,8 @@ const Farmers = () => {
                 >
                   Add Farmer
                 </Button>
+                </Link>
+                
 
                 <br />
 

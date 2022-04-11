@@ -20,7 +20,7 @@ const NewFarmer = () => {
     deliveryNumber,
     email,
     farmerAddress,
-  } = vendorFormData;
+  } = farmerData;
 
   const Input = ({ placeholder, type, name, value, handleChange }) => {
     return (
