@@ -8,37 +8,49 @@ const MilkDeliveries = () => {
     });
     return(
         <div className="row">
-            {connectedAccount && 
-                deliveryItems.map((item, index) => (
-                    <div key={item.id} className="col-md-3 mb-2">
-                        <div className="card">
-                            <div className="card-header">
-                                <div className="card-title">Delivery Item: {item.id}</div>
-                            </div>
-                            <div className="card-body">
-                                <p>Date: {item.date}</p>
-                                <p>Vendor: {item.vendor}</p>
-                                <p>Quality: {
-                                    item.quality === 0 && "GOOD"
-                                }
-                                {
-                                    item.quality === 1 && "STALE"
-                                }
-                                {
-                                    item.quality === 2 && "PERFECT"
-                                } 
-                                {
-                                    item.quality === 3 && "BAD"
-                                
-                                }
-                                </p>
-                                <p>Quantity: {item.quantity}</p>
-                            </div>
-                        </div>
-                    </div>
-                )) 
-            }
+        {/* display the data in a table */}
+        <div className="col-md-12">
+          <div className="card">
+            <div className="card-header">
+              <div className="card-title">
+                <h6>Milk Delivery Items</h6>
+              </div>
+            </div>
+            <div className="card-body">
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Vendor</th>
+                    <th>Quantity</th>
+                    <th>Quality</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {connectedAccount &&
+                    deliveryItems.map((item, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{item.id}</td>
+                          <td>{item.vendor}</td>
+                          <td>{item.quantity}</td>
+                          <td>
+                            {item.quality === 0 && "GOOD"}
+                            {item.quality === 1 && "STALE"}
+                            {item.quality === 2 && "PERFECT"}
+                            {item.quality === 3 && "BAD"}
+                          </td>
+                          <td>{item.date}</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+      </div>
     );
 }
 
