@@ -17,6 +17,7 @@ import Farmers from "./components/dashboard/Farmers";
 import Deliveries from "./components/dashboard/Deliveries";
 import Settings from "./components/dashboard/Settings";
 import Logout from "./components/dashboard/Logout";
+import NewFarmer from "./components/NewFarmer";
 // import Login from "./components/dashboard/Login";
 //import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
@@ -68,6 +69,11 @@ const App = () => {
           <Sidebar />
           <Login />
         </Route> */}
+
+        <Route path="/new">
+          <Sidebar />
+          <NewFarmer />
+        </Route>
       </Switch>
     </Router>
   );

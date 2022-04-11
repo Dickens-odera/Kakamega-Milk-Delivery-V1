@@ -270,8 +270,8 @@ export const MilkDeliveryProvider = ({ children }) => {
             const data = await milkDeliveryContract.listAllFarmers();
             const structuredFarmerData = data.map((item, index) => ({
                 id: item.id.toNumber(),
-                fisrt_name: item.factory,
-                last_name: item.name,
+                fisrt_name: item.firstName,
+                last_name: item.lastName,
                 email: item.email,
                 phoneNumber: item.phoneNumber,
                 idNumber: item.idNumber.toNumber(),
@@ -287,7 +287,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     }
 
     const addNewFarmer = async() => {
-        const { first_name, last__name, email, address, location, phone_number, id_number } = farmerFormData;
+        const { first_name, last_name, email, address, location, phone_number, id_number } = farmerFormData;
 
         try {
             if (!ethereum) return alert("Please Install Metamask");
@@ -295,7 +295,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             const milkDeliveryContract = getMilkDeliveryContract();
             const validAddress = ethers.utils.getAddress(address);
             if (!ethers.utils.isAddress(validAddress)) return swal("Invalid Ethereum Address, Please enter a valid address");
-            const tx = await milkDeliveryContract.addNewFarmer(validAddress, first_name, last__name, location, phone_number, email, id_number);
+            const tx = await milkDeliveryContract.addNewFarmer(validAddress, first_name, last_name, location, phone_number, email, id_number);
 
             setIsFormLoading(true);
             console.log('Adding Farmer ....');
