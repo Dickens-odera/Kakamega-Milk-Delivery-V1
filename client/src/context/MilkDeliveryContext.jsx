@@ -324,7 +324,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     return (
         <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
-            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData, farmerData, addNewFarmer }}>
+            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData, farmerData, addNewFarmer, farmerFormData }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
