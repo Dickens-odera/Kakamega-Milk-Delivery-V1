@@ -27,12 +27,17 @@ const NewDeliveryItem = () => {
                 onChange={(e) => handleChange(e, name)}
                 className="form-control"
                 step={"0.001"}
+                min="0"
             ></input>
         );
     }
 
     return (
-        <div className="row">
+        <div className="row" style={
+            {
+                width: '100%',
+            }
+        }>
             <div className="col-md-6">
                 <div classame="mb-2">
                     {connectedAccount &&
@@ -41,7 +46,7 @@ const NewDeliveryItem = () => {
                                 <div className="card-title"><h6>Record New Milk Delivery Record</h6></div>
                             </div>
                             <div className="card-body">
-                                <Form onSubmit={handleSubmit}>
+                                <Form onSubmit={handleSubmit} >
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Quantity</Form.Label>
                                         {/* <Form.Control type="number" name="quantity" placeholder="Enter Milk Quantity"/> */}
@@ -61,7 +66,9 @@ const NewDeliveryItem = () => {
                                         </Spinner>
                                     ) : (
                                         <div>
-                                            <Button variant="primary" type="submit" className="mb-3">
+                                            <Button  variant="primary" type="submit" className="mb-3" style={{
+                                                backgroundColor: "#0c7631",
+                                            }}>
                                                 Submit Record
                                             </Button>
                                         </div>
