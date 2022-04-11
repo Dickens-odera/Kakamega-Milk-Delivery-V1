@@ -272,7 +272,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     return farmerById[_farmerId];
   }
 
-  function listAlFarmers() public view returns(Farmer[] memory){
+  function listAllFarmers() public view returns(Farmer[] memory){
     return farmers;
   }
 }

@@ -23,6 +23,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ isConnectedToRinkeby, setIsConnectedToRinkeby] = useState(false);
     const [ vendorData, setVendorData ] = useState([]);
     const [ farmerData, setFarmerData ] = useState([]);
+    const [ farmerFormData, setFarmerFormData] = useState({ first_name: '', last_name:'',email: '', location: ' ', address: ' ', phone_number: '',id_number:'' });
 
     const getMilkDeliveryContract = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -43,6 +44,8 @@ export const MilkDeliveryProvider = ({ children }) => {
         setFormData(( prevState ) => ( { ...prevState, [name]: e.target.value}));
         setVendorFormData(( prevState) => ({ ...prevState, [name]: e.target.value }));
         setVendorFormAddress(( prevState) => ({...prevState, [name]: e.target.value}));
+        setFarmerFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
+
     }
 
     const checkIfWalletIsConnected = async() => {
@@ -282,6 +285,35 @@ export const MilkDeliveryProvider = ({ children }) => {
         }
     }
 
+    const addNewFarmer = async() => {
+        const { first_name, last__name, email, address, location, phone_number, id_number } = farmerFormData;
+
+        try {
+            if (!ethereum) return alert("Please Install Metamask");
+
+            const milkDeliveryContract = getMilkDeliveryContract();
+            const validAddress = ethers.utils.getAddress(address);
+            if (!ethers.utils.isAddress(validAddress)) return swal("Invalid Ethereum Address, Please enter a valid address");
+            const tx = await milkDeliveryContract.addNewFarmer(validAddress, first_name, last__name, location, phone_number, email, id_number);
+
+            setIsFormLoading(true);
+            console.log('Adding Farmer ....');
+            console.log(tx.hash);
+
+            await tx.wait();
+
+            console.log('Sucesss ....');
+            console.log(tx.hash);
+            setIsFormLoading(false);
+            approveVendor(address);
+            swal("New Farmer Added Successfully");
+
+        } catch (error) {
+            console.error(error);
+            swal(error.message);
+            throw new Error("No Ethereum object detected");
+        }
+    }
     useEffect(() => {
         checkIfWalletIsConnected();
         getMilkQualityTypes();
@@ -291,7 +323,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     return (
         <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
-            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData, farmerData }}>
+            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData, farmerData, addNewFarmer }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
