@@ -74,6 +74,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             getWalletAddress();
             detectChangeInNetwork();
             getMilkDeliveryItems();
+            listAllVendors();
         }catch(error){
             console.error(error);
             
@@ -237,7 +238,7 @@ export const MilkDeliveryProvider = ({ children }) => {
         try{
             if(!ethereum) return alert("Please Install Metamask");
             const milkDeliveryContract = getMilkDeliveryContract();
-            const data = await milkDeliveryContract.listVendors();
+            const data = await milkDeliveryContract.vendorList();
             const structuredVendorItems = data.map((item, index) => ({
                 id: item.id.toNumber(),
                 factory: item.factory,
@@ -245,7 +246,7 @@ export const MilkDeliveryProvider = ({ children }) => {
                 email: item.email,
                 date: new Date(item.createdAt.toNumber() * 1000).toLocaleString()
             }));
-            console.log(structuredVendorItems);
+            console.log("Vemdor Data: ", structuredVendorItems);
             setVendorData(structuredVendorItems);
 
         }catch(error){
