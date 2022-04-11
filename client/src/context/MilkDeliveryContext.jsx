@@ -245,7 +245,7 @@ export const MilkDeliveryProvider = ({ children }) => {
                 email: item.email,
                 date: new Date(item.createdAt.toNumber() * 1000).toLocaleString()
             }));
-            console.log(structuredVendorItems);
+            console.log("Vemdor Data: ", structuredVendorItems);
             setVendorData(structuredVendorItems);
 
         }catch(error){
