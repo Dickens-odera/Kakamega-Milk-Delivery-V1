@@ -6,7 +6,7 @@ import NewVendor from './NewVendor';
 
 const NewDeliveryItem = () => {
     const { handleChange, formData, addNewDelivery, isLoading, connectedAccount } = useContext(MilkDeliveryContext);
-    const { quantity, quality } = formData;
+    const { quantity, quality,farmerId } = formData;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,6 +47,11 @@ const NewDeliveryItem = () => {
                             </div>
                             <div className="card-body">
                                 <Form onSubmit={handleSubmit} >
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>Farmer ID</Form.Label>
+                                        {/* <Form.Control type="number" name="quantity" placeholder="Enter Milk Quantity"/> */}
+                                        <Input name="farmerId" placeholder="Farmer ID" type="number" handleChange={handleChange} value={farmerId}></Input>
+                                    </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Quantity</Form.Label>
                                         {/* <Form.Control type="number" name="quantity" placeholder="Enter Milk Quantity"/> */}

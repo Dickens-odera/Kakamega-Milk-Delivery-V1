@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { MdSpaceDashboard } from "react-icons/md";
+import { MdSpaceDashboard,MdOutlineDeliveryDining } from "react-icons/md";
 import { RiDashboard2Fill } from "react-icons/ri";
 import { FaAddressCard, FaMicrophoneAlt } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
@@ -97,8 +97,8 @@ export default function Sidebar() {
                 onClick={() => setCurrentLink(6)}
               >
                 <Link to="/deliveries">
-                  <IoSettings />
-                  <span> Deliveries</span>
+                  <FaMicrophoneAlt />
+                  <span>Deliveries</span>
                 </Link>
               </li>
               <li
