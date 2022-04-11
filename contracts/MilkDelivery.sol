@@ -123,10 +123,11 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
      _;
    }
   /**
+    * @notice later on add onlyOwner modifier here
     * @dev approves a vendor for milk delivery, only performed by the contract owner
     * @param _vendor address
    */
-   function approveVendor(address _vendor) public onlyOwner isNotApprovedForVending(_vendor) returns(bool){
+   function approveVendor(address _vendor) public isNotApprovedForVending(_vendor) returns(bool){
       isApprovedForMilkVending[_vendor] = true;
       approvedVendors.push(_vendor);
       totalApprovedVendors = totalApprovedVendors.add(1);
@@ -134,6 +135,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
    }
 
   /**
+    * @notice please add only owner modifier (onlyOwner) later
     * @dev enables only the contract owner to add a new vendor
     * @param _newVendor address 
     * @param _milkFactory string
@@ -141,7 +143,6 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     * @param _email string 
    */
   function listNewVendor(address _newVendor, string memory _milkFactory, string memory _name, string memory _email) public   
-  onlyOwner
   vendorNotListed(_newVendor)
   returns(bool) 
   {
@@ -196,20 +197,22 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
   }
 
   /**
+    * @notice later on add onlyOwner modifier here
     * @dev enables contract owner to delist a vendor
     * @param _vendor address
    */
-  function delistVendor(address _vendor) public onlyOwner isListedAsAvendor(_vendor) returns(bool){
+  function delistVendor(address _vendor) public isListedAsAvendor(_vendor) returns(bool){
     isVendorListed[_vendor] = false;
     emit MilkVendorDelisted(_vendor, msg.sender, block.timestamp);
     return true;
   }
 
   /**
+    * @notice later on add onlyOwner modifier here
     * @dev revoke a milk vendor's approval for milk vending
     * @param _vendor address
    */
-  function revokeVendorApproval(address _vendor) public onlyOwner isApprovedForVending(_vendor) returns(bool){
+  function revokeVendorApproval(address _vendor) public isApprovedForVending(_vendor) returns(bool){
       isApprovedForMilkVending[_vendor] = false;
       //remove this vendor from the approved vendors array and maintain the array order
       /** 
