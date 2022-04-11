@@ -17,7 +17,7 @@ import Farmers from "./components/dashboard/Farmers";
 import Deliveries from "./components/dashboard/Deliveries";
 import Settings from "./components/dashboard/Settings";
 import Logout from "./components/dashboard/Logout";
-import Login from "./components/dashboard/Login";
+// import Login from "./components/dashboard/Login";
 //import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
 const App = () => {
@@ -64,10 +64,10 @@ const App = () => {
           <Sidebar />
           <Settings />
         </Route>
-        <Route path="/login">
+        {/* <Route path="/login">
           <Sidebar />
           <Login />
-        </Route>
+        </Route> */}
       </Switch>
     </Router>
   );
