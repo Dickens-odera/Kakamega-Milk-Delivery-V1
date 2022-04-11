@@ -1,0 +1,31 @@
+.loginPage {
+  /* background-image: url(/home/tk/Documents/Kadafa/kadafa/public/image/imagekadafa.png); */
+  background-size: cover;
+  display: flex;
+  justify-content: right;
+  align-content: right;
+  width: 100%;
+  align-items: right;
+  height: 100vh;
+  padding-right: 9%;
+  padding-top: 20%;
+  max-width: 100% !important;
+}
+
+.box {
+  border: 1px solid #dfdfdf;
+  background-color: #fff;
+}
+
+.g-btn {
+  width: 100% !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 15px !important;
+
+}
+.g-btn > div,
+.g-btn > div > svg {
+  width: 40px !important;
+  height: 38px !important;
+}
