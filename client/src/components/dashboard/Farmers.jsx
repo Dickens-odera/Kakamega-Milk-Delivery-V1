@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaAddressCard } from "react-icons/fa";
 import { Modal, Button } from "react-bootstrap";
-import axios from "axios";
+// import axios from "axios";
 
 const Farmers = () => {
   const [show, setShow] = useState(false);
@@ -27,28 +27,28 @@ const Farmers = () => {
   };
 
   //function to fetch all farmsers in db
-  async function fetchData() {
-    const result = await axios.get("http://localhost:8080/farmer/all");
-    setFarmers(result.data);
-  }
+  // async function fetchData() {
+  //   // const result = await axios.get("http://localhost:8080/farmer/all");
+  //   setFarmers(result.data);
+  // }
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(url, userData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .post(url, userData)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    setShow(false);
+    // setShow(false);
   };
 
   return (
