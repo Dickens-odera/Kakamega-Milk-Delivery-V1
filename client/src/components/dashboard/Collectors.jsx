@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { FaAddressCard } from "react-icons/fa";
+import { MilkDeliveryContext } from "../../context/MilkDeliveryContext";
 
 const Collectors = () => {
+  const { vendorData } = useContext(MilkDeliveryContext);
+  console.log(vendorData);
   return (
     <>
       <Section>
@@ -11,11 +14,16 @@ const Collectors = () => {
             <div className="row d-flex justify-content-between">
               <div className="col-6">
                 <h3>Collectors</h3>
-              
-                <button className="btn btn-primary" style={{
+
+                <button
+                  className="btn btn-primary"
+                  style={{
                     marginBottom: "1rem",
                     backgroundColor: "#0C7631",
-                }}>Add Collector</button>
+                  }}
+                >
+                  Add Collector
+                </button>
                 <br />
               </div>
             </div>
@@ -29,9 +37,14 @@ const Collectors = () => {
                           <span className="text-primary">
                             {/* <FaAddressCard size={50} /> */}
                           </span>
-                          <span className="text-dark" style={{
-                              fontWeight: "bold"
-                          }}>Collectors</span>
+                          <span
+                            className="text-dark"
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            Collectors
+                          </span>
                         </h5>
                       </div>
                     </div>
@@ -40,14 +53,27 @@ const Collectors = () => {
                         <table className="table table-striped table-bordered">
                           <thead>
                             <tr>
+                              <th>ID</th>
                               <th>Name</th>
-                              <th>Phone</th>
-                              <th>ID Number</th>
-                              <th>Location</th>
-                              <th>Actions</th>
+                              <th>Factory</th>
+                              <th>EMail</th>
+                              <th>Date</th>
                             </tr>
                           </thead>
-                          <tbody></tbody>
+                          <tbody>
+                            {/* map through the venders and display data on table */}
+                            {vendorData.map((vendor, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>{vendor.id}</td>
+                                  <td>{vendor.name}</td>
+                                  <td>{vendor.factory}</td>
+                                  <td>{vendor.email}</td>
+                                  <td>{vendor.date}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -80,8 +106,8 @@ const Section = styled.section`
       height: 50%;
       gap: 1rem;
     }
-    .custom-card{
-        width:1000px !important;
+    .custom-card {
+      width: 1000px !important;
     }
     .row__two {
       display: grid;
@@ -89,7 +115,6 @@ const Section = styled.section`
       gap: 1rem;
       height: 50%;
     }
-   
   }
   @media screen and (min-width: 280px) and (max-width: 1080px) {
     margin-left: 0;
