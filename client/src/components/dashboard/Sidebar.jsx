@@ -102,8 +102,8 @@ export default function Sidebar() {
                 </Link>
               </li>
               <li
-                className={currentLink === 6 ? "active" : "none"}
-                onClick={() => setCurrentLink(6)}
+                className={currentLink === 7 ? "active" : "none"}
+                onClick={() => setCurrentLink(7)}
               >
                 <Link to="/settings">
                   <IoSettings />

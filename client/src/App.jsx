@@ -15,6 +15,8 @@ import styled from "styled-components";
 import Collectors from "./components/dashboard/Collectors";
 import Farmers from "./components/dashboard/Farmers";
 import Deliveries from "./components/dashboard/Deliveries";
+import Settings from "./components/dashboard/Settings";
+import Logout from "./components/dashboard/Logout";
 //import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
 const App = () => {
@@ -29,7 +31,7 @@ const App = () => {
               <NavbarItem />
               <Welcome />
               <NewDeliveryItem />
-              <MilkDeliveries />
+              {/* <MilkDeliveries /> */}
               <Footer />
             </Row>
           </Container>
@@ -47,7 +49,7 @@ const App = () => {
           {/* <Register /> */}
         </Route>
         <Route path="/logout">
-          {/* <Logout /> */}
+          <Logout />
         </Route>
         <Route path="/payments">
           {/* <Sidebar /> */}
@@ -58,8 +60,8 @@ const App = () => {
           <Deliveries />
         </Route>
         <Route path="/settings">
-          {/* <Sidebar /> */}
-          {/* <Settings /> */}
+          <Sidebar />
+          <Settings />
         </Route>
       </Switch>
     </Router>

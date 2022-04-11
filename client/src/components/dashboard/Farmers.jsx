@@ -278,7 +278,7 @@ const Section = styled.section`
       gap: 1rem;
     }
     .custom-card {
-      width: 1100px !important;
+      width: 1000px !important;
     }
     .row__two {
       display: grid;
