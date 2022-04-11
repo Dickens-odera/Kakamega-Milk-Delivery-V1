@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { MilkDeliveryContext } from '../context/MilkDeliveryContext';
 
 const MilkDeliveries = () => {
-    const { milkDeliveryItems, connectedAccount } = useContext(MilkDeliveryContext);
+    const { milkDeliveryItems, connectedAccount, vendorData } = useContext(MilkDeliveryContext);
     const deliveryItems = milkDeliveryItems.sort(( a, b) => {
         return b.id - a.id;
     });

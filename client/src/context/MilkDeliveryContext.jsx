@@ -21,6 +21,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ networkId, setNetworkId ] = useState();
     const [ milkQualityTypes, setMilkQualityTypes ] = useState([]);
     const [ isConnectedToRinkeby, setIsConnectedToRinkeby] = useState(false);
+    const [ vendorData, setVendorData ] = useState([]);
 
     const getMilkDeliveryContract = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -54,7 +55,8 @@ export const MilkDeliveryProvider = ({ children }) => {
                 getContractOwnerAddress();
                 detectChangeInNetwork();
                 getMilkDeliveryItems();
-                getWalletAddress();            
+                getWalletAddress(); 
+                listAllVendors();           
             }
             console.log(accounts);
         }catch(error){
@@ -231,6 +233,25 @@ export const MilkDeliveryProvider = ({ children }) => {
         }
     }
 
+    const listAllVendors = async() => {
+        try{
+            if(!ethereum) return alert("Please Install Metamask");
+            const milkDeliveryContract = getMilkDeliveryContract();
+            const data = await milkDeliveryContract.listVendors();
+            const structuredVendorItems = data.map((item, index) => ({
+                id: item.id.toNumber(),
+                factory: item.factory,
+                name: item.name,
+                email: item.email,
+                date: new Date(item.createdAt.toNumber() * 1000).toLocaleString()
+            }));
+            console.log(structuredVendorItems);
+            setVendorData(structuredVendorItems);
+
+        }catch(error){
+            console.log(error);
+        }
+    }
     useEffect(() => {
         checkIfWalletIsConnected();
         getMilkQualityTypes();
@@ -240,7 +261,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     return (
         <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
-            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby }}>
+            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
