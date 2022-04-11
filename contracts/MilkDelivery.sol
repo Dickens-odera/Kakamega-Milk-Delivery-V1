@@ -47,10 +47,10 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     uint id;
     string firstName;
     string lastName;
-    bytes email;
-    bytes phoneNumber;
+    string email;
+    string phoneNumber;
     int idNumber;
-    bytes location;
+    string location;
     address payable farmerAddress;
     uint createdAt;
   }
@@ -255,9 +255,9 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
     address _farmerAddress,
     string memory _firstName, 
     string memory _lastName, 
-    bytes memory _location,
-    bytes memory _phoneNumber,
-    bytes memory _email,
+    string memory _location,
+    string memory _phoneNumber,
+    string memory _email,
     int _idNumber
     ) public farmerNotListed(_farmerAddress) returns(bool success){
       farmerIds.increment();
