@@ -12,7 +12,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Sidebar from "./components/dashboard/Sidebar";
 import styled from "styled-components";
-
+import Collectors from "./components/dashboard/Collectors";
 //import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
 const App = () => {
@@ -32,19 +32,9 @@ const App = () => {
             </Row>
           </Container>
         </Route>
-        <Route path="/collector">
-          <Container>
-            <Row>
-              <NavbarItem />
-              <NewDeliveryItem />
-              <MilkDeliveries />
-              <Footer />
-            </Row>
-          </Container>
-        </Route>
         <Route path="/collectors">
           <Sidebar />
-          {/* <Register /> */}
+          <Collectors />
         </Route>
         <Route path="/farmers">
           <Sidebar />
