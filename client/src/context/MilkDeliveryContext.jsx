@@ -306,7 +306,6 @@ export const MilkDeliveryProvider = ({ children }) => {
             console.log('Sucesss ....');
             console.log(tx.hash);
             setIsFormLoading(false);
-            approveVendor(address);
             swal("New Farmer Added Successfully");
 
         } catch (error) {
