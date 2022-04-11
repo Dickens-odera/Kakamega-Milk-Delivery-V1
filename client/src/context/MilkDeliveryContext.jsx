@@ -11,7 +11,7 @@ const rinkebyNetworkId = 4;
 
 export const MilkDeliveryProvider = ({ children }) => {
     const [ connectedAccount, setConnectedAccount ] = useState('');
-    const [ formData, setFormData ] = useState({ quantity: '',quality: ''});
+    const [formData, setFormData] = useState({ quantity: '', quality: '', farmerId:''});
     const [ isLoading, setIsLoading ] = useState(false);
     const [ isFormLoading, setIsFormLoading] = useState(false);
     const [ milkDeliveryItems, setMilkDeliveryItems ] = useState([]);
@@ -107,7 +107,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     }
 
     const addNewDelivery = async() => {
-        const { quantity, quality } = formData;
+        const { quantity, quality, farmerId } = formData;
         try{
             if (!ethereum) return alert("Please Install Metamask");
 
@@ -115,10 +115,10 @@ export const MilkDeliveryProvider = ({ children }) => {
             //const listVendor = await milkDeliveryConract.listNewVendor(connectedtAccount,"My Factory","Dickens Odera","dickensodera9@gmail.com");
             //const approveVendor = await milkDeliveryConract.approveVendor(connectedtAccount);
 
-            const tx = await milkDeliveryConract.recordNewDelivery(quantity.toString(), quality.toString());
+            const tx = await milkDeliveryConract.recordNewDelivery(quantity.toString(), quality.toString(), farmerId.toString());
             
             setIsLoading(true);
-            console.log('Loading ....');
+            console.log('Adding New Deliver Record ....');
             console.log(tx.hash);
 
             await tx.wait();
@@ -128,7 +128,8 @@ export const MilkDeliveryProvider = ({ children }) => {
             swal("Delivery Item Added Successfully");
             setFormData({
                 quality:'',
-                quantity:''
+                quantity:'',
+                farmerId:''
             });
             getMilkDeliveryItems();
             listAllVendors();
