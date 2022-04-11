@@ -13,6 +13,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Sidebar from "./components/dashboard/Sidebar";
 import styled from "styled-components";
 import Collectors from "./components/dashboard/Collectors";
+import Farmers from "./components/dashboard/Farmers";
+import Deliveries from "./components/dashboard/Deliveries";
 //import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
 const App = () => {
@@ -38,7 +40,7 @@ const App = () => {
         </Route>
         <Route path="/farmers">
           <Sidebar />
-          {/* <Farmers /> */}
+          <Farmers />
         </Route>
         <Route path="/transactions">
           {/* <Sidebar /> */}
@@ -51,9 +53,9 @@ const App = () => {
           {/* <Sidebar /> */}
           {/* <Register /> */}
         </Route>
-        <Route path="/settings">
-          {/* <Sidebar /> */}
-          {/* <Settings /> */}
+        <Route path="/deliveries">
+          <Sidebar />
+          <Deliveries />
         </Route>
         <Route path="/settings">
           {/* <Sidebar /> */}
