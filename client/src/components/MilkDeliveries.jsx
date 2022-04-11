@@ -23,6 +23,7 @@ const MilkDeliveries = () => {
                   <tr>
                     <th>ID</th>
                     <th>Vendor</th>
+                    <th>Farmer ID</th>
                     <th>Quantity</th>
                     <th>Quality</th>
                     <th>Date</th>
@@ -35,6 +36,7 @@ const MilkDeliveries = () => {
                         <tr key={index}>
                           <td>{item.id}</td>
                           <td>{item.vendor}</td>
+                          <td>{item.farmerId}</td>
                           <td>{item.quantity}</td>
                           <td>
                             {item.quality === 0 && "GOOD"}

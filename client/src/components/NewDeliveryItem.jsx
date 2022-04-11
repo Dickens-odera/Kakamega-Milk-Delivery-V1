@@ -13,7 +13,7 @@ const NewDeliveryItem = () => {
 
         if (!quantity || !quality || !farmerId) return;
         if (quality > 3) return swal("Invalid Quality Type: Please Chose either:0-GOOD, 1-STALE, 2- PERFECT, 3-BAD");
-        console.log(quantity);
+        console.log(formData);
         addNewDelivery();
     }
 
