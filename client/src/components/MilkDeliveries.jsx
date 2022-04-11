@@ -6,6 +6,7 @@ const MilkDeliveries = () => {
     const deliveryItems = milkDeliveryItems.sort(( a, b) => {
         return b.id - a.id;
     });
+    // console.log(vendorData)
     return(
         <div className="row">
         {/* display the data in a table */}
