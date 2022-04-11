@@ -37,7 +37,7 @@ const NewVendor = () => {
 
     return(
         <div className="">
-            {connectedAccount && connectedAccount == contractOwner && 
+            {connectedAccount && 
                     <div className="card mb-2">
                         <div className="card-header">
                             <div className="card-title"><h6>Add New Vendor</h6></div>

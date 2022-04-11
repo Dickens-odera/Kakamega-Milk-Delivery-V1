@@ -12,7 +12,15 @@ const NewFarmer = () => {
     contractOwner,
     isFormLoading,
   } = useContext(MilkDeliveryContext);
-  const { name, email, address, factory, isApproved } = vendorFormData;
+  const {
+    firstName,
+    lastName,
+    location,
+    phoneNumber,
+    deliveryNumber,
+    email,
+    farmerAddress,
+  } = vendorFormData;
 
   const Input = ({ placeholder, type, name, value, handleChange }) => {
     return (
@@ -31,20 +39,31 @@ const NewFarmer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({
-      name,
+      firstName,
+      lastName,
+      location,
+      phoneNumber,
+      deliveryNumber,
       email,
-      address,
-      factory,
-      isApproved,
+      farmerAddress,
     });
 
-    if (!firstName || !lastName || !location || !phoneNumber || !deliveryNumber || !email || !farmerAddress) return;
+    if (
+      !firstName ||
+      !lastName ||
+      !location ||
+      !phoneNumber ||
+      !deliveryNumber ||
+      !email ||
+      !farmerAddress
+    )
+      return;
     await listVendor();
   };
 
   return (
     <div className="">
-      {connectedAccount && connectedAccount == contractOwner && (
+      {connectedAccount && (
         <div className="card mb-2">
           <div className="card-header">
             <div className="card-title">

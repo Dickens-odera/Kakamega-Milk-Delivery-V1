@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaAddressCard } from "react-icons/fa";
 import { Modal, Button } from "react-bootstrap";
+import NewFarmer from "../NewFarmer";
 // import axios from "axios";
 
 const Farmers = () => {
