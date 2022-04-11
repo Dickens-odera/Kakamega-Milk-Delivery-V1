@@ -265,6 +265,7 @@ contract MilkDelivery is Ownable, AccessControl,MilkDeliveryInterface {
       Farmer memory newFarmer = Farmer(currentFarmerId,_firstName,_lastName,_email,_phoneNumber,_idNumber,_location,payable(_farmerAddress), block.timestamp);
       totalFarmers = totalFarmers.add(1);
       isFarmerListed[_farmerAddress] = true;
+      isAnExistingFarmer[currentFarmerId] = true;
       farmers.push(newFarmer);
       farmerById[currentFarmerId] = newFarmer;
       emit NewFarmer(_farmerAddress,currentFarmerId, block.timestamp);
