@@ -74,6 +74,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             getWalletAddress();
             detectChangeInNetwork();
             getMilkDeliveryItems();
+            listAllVendors();
         }catch(error){
             console.error(error);
             
