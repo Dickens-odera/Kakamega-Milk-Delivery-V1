@@ -1,0 +1,17 @@
+.welcome{
+ 
+  display: column;
+  justify-content: center;
+  align-content: center;
+  width: 40%;
+  align-items: center;
+  height: 100vh;
+  padding-top: 18%;
+  margin: 0 auto;
+ 
+}
+.Welcomepage{
+  /* background-image: url("/home/tk/Documents/Kadafa/kadafa/public/image/nav.png"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+}
