@@ -238,7 +238,7 @@ export const MilkDeliveryProvider = ({ children }) => {
         try{
             if(!ethereum) return alert("Please Install Metamask");
             const milkDeliveryContract = getMilkDeliveryContract();
-            const data = await milkDeliveryContract.listVendors();
+            const data = await milkDeliveryContract.vendorList();
             const structuredVendorItems = data.map((item, index) => ({
                 id: item.id.toNumber(),
                 factory: item.factory,
