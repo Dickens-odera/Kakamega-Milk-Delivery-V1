@@ -1,27 +1,77 @@
-import { useState, useContext } from 'react';
-import { NavbarItem, Footer, MilkDeliveries, MilkDeliveryItem, Welcome, NewDeliveryItem, NewVendor } from './components';
-import { Container, Row, Col } from 'react-bootstrap';
+import { useState, useContext } from "react";
+import {
+  NavbarItem,
+  Footer,
+  MilkDeliveries,
+  MilkDeliveryItem,
+  Welcome,
+  NewDeliveryItem,
+  NewVendor,
+} from "./components";
+import { Container, Row, Col } from "react-bootstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Sidebar from "./components/dashboard/Sidebar";
+import styled from "styled-components";
+
 //import { MilkDeliveryContext } from './context/MilkDeliveryContext';
 
-const App = () =>  {
+const App = () => {
   //const { networkId } = useContext(MilkDeliveryContext);
 
   return (
-   <div className="">
-    <Container>
-      <Row>
-          <NavbarItem />
-            <Welcome />
-           
-            <NewDeliveryItem />
-            <MilkDeliveries />
-            <Footer />
-        
-      </Row>
-    </Container>
-   </div>
-
+    <Router>
+      <Switch>
+        <Route path="/home">
+          <Container>
+            <Row>
+              <NavbarItem />
+              <Welcome />
+              <NewDeliveryItem />
+              <MilkDeliveries />
+              <Footer />
+            </Row>
+          </Container>
+        </Route>
+        <Route path="/collector">
+          <Container>
+            <Row>
+              <NavbarItem />
+              <NewDeliveryItem />
+              <MilkDeliveries />
+              <Footer />
+            </Row>
+          </Container>
+        </Route>
+        <Route path="/collectors">
+          <Sidebar />
+          {/* <Register /> */}
+        </Route>
+        <Route path="/farmers">
+          <Sidebar />
+          {/* <Farmers /> */}
+        </Route>
+        <Route path="/transactions">
+          {/* <Sidebar /> */}
+          {/* <Register /> */}
+        </Route>
+        <Route path="/logout">
+          {/* <Logout /> */}
+        </Route>
+        <Route path="/payments">
+          {/* <Sidebar /> */}
+          {/* <Register /> */}
+        </Route>
+        <Route path="/settings">
+          {/* <Sidebar /> */}
+          {/* <Settings /> */}
+        </Route>
+        <Route path="/settings">
+          {/* <Sidebar /> */}
+          {/* <Settings /> */}
+        </Route>
+      </Switch>
+    </Router>
   );
-}
+};
 
-export default App
+export default App;

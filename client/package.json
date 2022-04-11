@@ -13,7 +13,11 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.1",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-loader-spinner": "^5.0.6",
+    "react-router-dom": "^5.3.0",
+    "scrollreveal": "^4.0.9",
+    "styled-components": "^5.3.5",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.3.5"
   },
