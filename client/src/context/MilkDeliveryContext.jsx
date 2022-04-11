@@ -22,6 +22,7 @@ export const MilkDeliveryProvider = ({ children }) => {
     const [ milkQualityTypes, setMilkQualityTypes ] = useState([]);
     const [ isConnectedToRinkeby, setIsConnectedToRinkeby] = useState(false);
     const [ vendorData, setVendorData ] = useState([]);
+    const [ farmerData, setFarmerData ] = useState([]);
 
     const getMilkDeliveryContract = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -56,7 +57,8 @@ export const MilkDeliveryProvider = ({ children }) => {
                 detectChangeInNetwork();
                 getMilkDeliveryItems();
                 getWalletAddress(); 
-                listAllVendors();           
+                listAllVendors();
+                listAllFarmers();           
             }
             console.log(accounts);
         }catch(error){
@@ -75,6 +77,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             detectChangeInNetwork();
             getMilkDeliveryItems();
             listAllVendors();
+            listAllFarmers();
         }catch(error){
             console.error(error);
             
@@ -125,6 +128,8 @@ export const MilkDeliveryProvider = ({ children }) => {
                 quantity:''
             });
             getMilkDeliveryItems();
+            listAllVendors();
+            listAllFarmers();
         }catch(error){
             swal(error.message);
             console.error(error);
@@ -241,7 +246,7 @@ export const MilkDeliveryProvider = ({ children }) => {
             const data = await milkDeliveryContract.vendorList();
             const structuredVendorItems = data.map((item, index) => ({
                 id: item.id.toNumber(),
-                factory: item.factory,
+                factory: item.milkFactory,
                 name: item.name,
                 email: item.email,
                 date: new Date(item.createdAt.toNumber() * 1000).toLocaleString()
@@ -253,6 +258,30 @@ export const MilkDeliveryProvider = ({ children }) => {
             console.log(error);
         }
     }
+
+    const listAllFarmers = async() => {
+        try{
+            if (!ethereum) return alert("Please Install Metamask");
+            const milkDeliveryContract = getMilkDeliveryContract();
+            const data = await milkDeliveryContract.listAllFarmers();
+            const structuredFarmerData = data.map((item, index) => ({
+                id: item.id.toNumber(),
+                fisrt_name: item.factory,
+                last_name: item.name,
+                email: item.email,
+                phoneNumber: item.phoneNumber,
+                idNumber: item.idNumber.toNumber(),
+                location: item.location,
+                walletAddress: item.farmerAddress,
+                createdAt: new Date(item.createdAt.toNumber() * 1000).toLocaleString()
+            }));
+            console.log("Farmer Data: ", structuredFarmerData);
+            setFarmerData(structuredFarmerData);
+        }catch(error){
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         checkIfWalletIsConnected();
         getMilkQualityTypes();
@@ -262,7 +291,7 @@ export const MilkDeliveryProvider = ({ children }) => {
 
     return (
         <MilkDeliveryContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, addNewDelivery, isLoading, milkDeliveryItems, vendorFormData, 
-            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData }}>
+            listVendor, contractOwner, vendorFormAddress, approveVendor, networkId, milkQualityTypes, isFormLoading, isConnectedToRinkeby, vendorData, farmerData }}>
             { children }
         </MilkDeliveryContext.Provider>
     );
