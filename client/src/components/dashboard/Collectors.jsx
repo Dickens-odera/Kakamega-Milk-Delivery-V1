@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { FaAddressCard } from "react-icons/fa";
+import {Link } from 'react-router-dom';
 import { MilkDeliveryContext } from "../../context/MilkDeliveryContext";
 
 const Collectors = () => {
@@ -15,7 +16,7 @@ const Collectors = () => {
               <div className="col-6">
                 <h3>Collectors</h3>
 
-                <button
+                {/* <button
                   className="btn btn-primary"
                   style={{
                     marginBottom: "1rem",
@@ -23,7 +24,7 @@ const Collectors = () => {
                   }}
                 >
                   Add Collector
-                </button>
+                </button> */}
                 <br />
               </div>
             </div>
