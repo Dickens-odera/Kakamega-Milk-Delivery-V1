@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { FaAddressCard } from "react-icons/fa";
 import { Modal, Button } from "react-bootstrap";
 import NewFarmer from "../NewFarmer";
-import {Link} from 'react-router-dom'
+import { MilkDeliveryContext } from "../../context/MilkDeliveryContext";
+
+import { Link } from "react-router-dom";
 // import axios from "axios";
 
 const Farmers = () => {
+  const { connectedAccount, farmerData } =
+    useContext(MilkDeliveryContext);
+
+  // const farmerDetails = structuredFarmerData.sort((a, b) => {
+  //   return b.id - a.id;
+  // });
+  console.log(farmerData);
+
   const [show, setShow] = useState(false);
   const [farmers, setFarmers] = useState([]);
   const handleClose = () => setShow(false);
@@ -65,18 +75,17 @@ const Farmers = () => {
 
               <div>
                 <Link to="/new">
-                <Button
-                  variant="primary"
-                  style={{
-                    marginBottom: "1rem",
-                    backgroundColor: "#0C7631",
-                  }}
-                  onClick={handleShow}
-                >
-                  Add Farmer
-                </Button>
+                  <Button
+                    variant="primary"
+                    style={{
+                      marginBottom: "1rem",
+                      backgroundColor: "#0C7631",
+                    }}
+                    onClick={handleShow}
+                  >
+                    Add Farmer
+                  </Button>
                 </Link>
-                
 
                 <br />
 
@@ -240,15 +249,18 @@ const Farmers = () => {
                           </thead>
                           <tbody>
                             {/* loop through the farmer data and display in a table */}
-                            {farmers.map((farmer) => (
-                              <tr key={farmer.id}>
-                                <td>{farmer.firstName}</td>
-                                <td>{farmer.lastName}</td>
-                                <td>{farmer.idNumber}</td>
-                                <td>{farmer.location}</td>
-                                <td>{farmer.phoneNumber}</td>
-                              </tr>
-                            ))}
+                            {connectedAccount &&
+                              farmerData.map((farmer) => (
+                                <tr key={farmer.id}>
+                                  <td>{farmer.fisrt_name}</td>
+                                  <td>{farmer.last_name}</td>
+                                  <td>{farmer.idNumber}</td>
+                                  <td>{farmer.location}</td>
+                                  <td>{farmer.phoneNumber}</td>
+                                  <td>{farmer.walletAddress}</td>
+                                  <td>{farmer.createdAt}</td>
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>

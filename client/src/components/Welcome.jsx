@@ -7,7 +7,9 @@ const Welcome = () => {
     return(
         <div className="md-3">
             {!connectedAccount && 
-                <Button onClick={connectWallet}>Connect Wallet</Button>
+                <Button onClick={connectWallet} 
+                style={{backgroundColor:"#0c7631"}}
+                >Connect Wallet</Button>
             }
 
             {networkId && networkId != 4 &&

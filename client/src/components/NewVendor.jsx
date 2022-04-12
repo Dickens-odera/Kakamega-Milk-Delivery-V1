@@ -17,6 +17,7 @@ const NewVendor = () => {
                 className="form-control justify-content-center"
                 value={value}
                 step={"0.001"}
+                min="0"
             ></input>
         );
     }
@@ -40,14 +41,14 @@ const NewVendor = () => {
             {connectedAccount && 
                     <div className="card mb-2">
                         <div className="card-header">
-                            <div className="card-title"><h6>Add New Vendor</h6></div>
+                            <div className="card-title"><h6>Add New Collector</h6></div>
                         </div>
                         <div className="card-body">
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Name</Form.Label>
                                 {/* <Form.Control type="text" name="name" placeholder="Enter vendor Name" handleChange={handleChange}/> */}
-                                <Input name="name" placeholder="Enter Vendor Name" type="text" handleChange={handleChange} value={name}></Input>
+                                <Input name="name" placeholder="Enter Collector Name" type="text" handleChange={handleChange} value={name}></Input>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -68,12 +69,7 @@ const NewVendor = () => {
                                         <Input name="factory" placeholder="Enter Vendor Milk Factory" type="text" handleChange={handleChange} value={factory}></Input>
 
                                     </Form.Group>
-                                    {/* <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label style={{ color:"red"}}>Do You Want To Approve this Vendor for Milk Vending?</Form.Label><br></br>
-                                        <Form.Control type="text" name="quality" placeholder="Select Quality"/>
-                                        <input name="isApproved" type="radio" handleChange={handleChange} value="yes"></input> Yes <br></br>
-                                        <input name="isApproved" type="radio" handleChange={handleChange} value="no"></input> No
-                                    </Form.Group> */}
+                                 
 
                             {isFormLoading ? (
                                         <Spinner animation="border" role="status">
@@ -82,7 +78,7 @@ const NewVendor = () => {
                                     ) : (
                                         <div>
                                             <Button variant="success" type="submit" className="mb-3">
-                                                List New Vendor
+                                                List New Collector
                                             </Button>
                                         </div>
                                     )
