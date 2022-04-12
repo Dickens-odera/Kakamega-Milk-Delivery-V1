@@ -6,21 +6,22 @@ import { Container, Row, Form, Spinner, Button } from "react-bootstrap";
 const NewFarmer = () => {
   const {
     connectedAccount,
-    vendorFormData,
+    farmerFormData,
     listVendor,
     handleChange,
     contractOwner,
+    addNewFarmer,
     isFormLoading,
   } = useContext(MilkDeliveryContext);
   const {
-    firstName,
-    lastName,
+    first_name,
+    last_name,
     location,
-    phoneNumber,
-    deliveryNumber,
+    phone_number,
+    id_number,
     email,
-    farmerAddress,
-  } = farmerData;
+    address,
+  } = farmerFormData;
 
   const Input = ({ placeholder, type, name, value, handleChange }) => {
     return (
@@ -39,26 +40,26 @@ const NewFarmer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({
-      firstName,
-      lastName,
-      location,
-      phoneNumber,
-      deliveryNumber,
-      email,
-      farmerAddress,
+        first_name,
+        last_name,
+        location,
+        phone_number,
+        id_number,
+        email,
+        address,
     });
 
     if (
-      !firstName ||
-      !lastName ||
+      !first_name ||
+      !last_name ||
       !location ||
-      !phoneNumber ||
-      !deliveryNumber ||
+      !phone_number ||
+      !id_number ||
       !email ||
-      !farmerAddress
+      !address
     )
       return;
-    await listVendor();
+    await addNewFarmer();
   };
 
   return (
@@ -76,34 +77,34 @@ const NewFarmer = () => {
                 <Form.Label>First Name</Form.Label>
                 {/* <Form.Control type="text" name="name" placeholder="Enter vendor Name" handleChange={handleChange}/> */}
                 <Input
-                  name="firstName"
+                  name="first_name"
                   placeholder="Enter First Name"
                   type="text"
                   handleChange={handleChange}
-                  value={firstName}
+                  value={first_name}
                 ></Input>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>LastName</Form.Label>
+                <Form.Label>Last Name</Form.Label>
                 {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
                 <Input
-                  name="email"
+                  name="last_name"
                   placeholder="Enter Last Name"
                   type="text"
                   handleChange={handleChange}
-                  value={lastName}
+                  value={last_name}
                 ></Input>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Farmer Address</Form.Label>
                 {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
                 <Input
-                  name="farmerAddress"
+                  name="address"
                   placeholder="Farmer Address"
                   type="text"
                   handleChange={handleChange}
-                  value={farmerAddress}
+                  value={address}
                 ></Input>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -121,11 +122,11 @@ const NewFarmer = () => {
                 <Form.Label>Phone Number</Form.Label>
                 {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
                 <Input
-                  name="phoneNumber"
+                  name="phone_number"
                   placeholder="Enter Phone Number"
                   type="text"
                   handleChange={handleChange}
-                  value={phoneNumber}
+                  value={phone_number}
                 ></Input>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -140,14 +141,14 @@ const NewFarmer = () => {
                 ></Input>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Delivery Number</Form.Label>
+                <Form.Label>ID Number</Form.Label>
                 {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}
                 <Input
-                  name="deliveryNumber"
+                  name="id_number"
                   placeholder="Enter Delivery Number"
                   type="text"
                   handleChange={handleChange}
-                  value={deliveryNumber}
+                  value={id_number}
                 ></Input>
               </Form.Group>
               {isFormLoading ? (
