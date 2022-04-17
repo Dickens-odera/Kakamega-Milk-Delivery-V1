@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
 import { MilkDeliveryContext } from "../../context/MilkDeliveryContext";
+import { useHistory } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 // import axios from "axios";
@@ -10,6 +11,7 @@ import { Link } from "react-router-dom";
 const MilkDelivered = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+  const history = useHistory();
   const handleShow = () => setShow(true);
   const url = "http://localhost:8080/delivery/add";
 
@@ -30,11 +32,9 @@ const MilkDelivered = () => {
   //   function to fetch all farmsers in db
   async function fetchData() {
     const result = await axios.get("http://localhost:8080/delivery/all");
-     console.log(result.data);
+    console.log(result.data);
     setDelivery(result.data);
   }
-
-
 
   useEffect(() => {
     fetchData();
@@ -43,16 +43,22 @@ const MilkDelivered = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // axios
-    //   .post(url, userData)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .post(url, delivery)
+      .then((res) => {
+        //check is status is 201
+        if (res.status === 201) {
+          history.push("/newdelivery");
+          fetchData();
+          console.log(res.data);
+        } else {
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    // setShow(false);
+    setShow(false);
   };
 
   return (
