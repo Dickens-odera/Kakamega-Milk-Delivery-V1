@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const MilkDelivered = () => {
   const [show, setShow] = useState(false);
+  const [sms,setSms]=useState(false)
   const handleClose = () => setShow(false);
   const history = useHistory();
   const handleShow = () => setShow(true);
@@ -40,6 +41,16 @@ const MilkDelivered = () => {
     fetchData();
   }, []);
 
+  // // get farmer phoneNumber by getting his details from the db
+  // async function getFarmerPhoneNumber(id) {
+  //   const result = await axios.get(`http://localhost:8080/member/${id}`);
+  //   console.log(result.data);
+  //   return result.data.phoneNumber;
+  // }
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -50,7 +61,7 @@ const MilkDelivered = () => {
         if (res.status === 201) {
           history.push("/newdelivery");
           fetchData();
-          console.log(res.data);
+          console.log("MEMBER ID",res.data.member_id);
         } else {
         }
       })
