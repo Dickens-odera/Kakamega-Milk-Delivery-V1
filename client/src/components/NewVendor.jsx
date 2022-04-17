@@ -38,6 +38,7 @@ const NewVendor = () => {
 
     return(
         <div className="">
+            {/* connectedAccount && connectedAccount == contractOwner &&  */}
             {connectedAccount && 
                     <div className="card mb-2">
                         <div className="card-header">
@@ -50,7 +51,6 @@ const NewVendor = () => {
                                 {/* <Form.Control type="text" name="name" placeholder="Enter vendor Name" handleChange={handleChange}/> */}
                                 <Input name="name" placeholder="Enter Collector Name" type="text" handleChange={handleChange} value={name}></Input>
                                     </Form.Group>
-
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Email</Form.Label>
                                         {/* <Form.Control type="text" name="quality" placeholder="Select Quality"/> */}

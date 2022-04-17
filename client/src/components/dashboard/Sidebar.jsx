@@ -93,8 +93,8 @@ export default function Sidebar() {
                 </Link>
               </li>
               <li
-                className={currentLink === 6 ? "active" : "none"}
-                onClick={() => setCurrentLink(6)}
+                className={currentLink === 4 ? "active" : "none"}
+                onClick={() => setCurrentLink(4)}
               >
                 <Link to="/deliveries">
                   <FaMicrophoneAlt />
@@ -102,8 +102,17 @@ export default function Sidebar() {
                 </Link>
               </li>
               <li
-                className={currentLink === 7 ? "active" : "none"}
-                onClick={() => setCurrentLink(7)}
+                className={currentLink === 5 ? "active" : "none"}
+                onClick={() => setCurrentLink(5)}
+              >
+                <Link to="/newdelivery">
+                  <IoSettings />
+                  <span>Milk Delivered</span>
+                </Link>
+              </li>
+              <li
+                className={currentLink === 6 ? "active" : "none"}
+                onClick={() => setCurrentLink(6)}
               >
                 <Link to="/settings">
                   <IoSettings />
