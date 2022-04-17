@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const MilkDelivered = () => {
   const [show, setShow] = useState(false);
-  const [sms,setSms]=useState(false)
+  const [sms, setSms] = useState(false);
   const handleClose = () => setShow(false);
   const history = useHistory();
   const handleShow = () => setShow(true);
@@ -37,39 +37,44 @@ const MilkDelivered = () => {
     setDelivery(result.data);
   }
 
+  // get farmer phoneNumber,milk quality and milk quantity after being saved to db then send SMS
+  async function sendSMS(phoneNumber, milkQuality, milkQuantity) {
+    const result = await axios
+      .post("http://localhost:3005/", {
+        to: [phoneNumber],
+        message: `Your milk delivery of ${milkQuantity} litres of ${milkQuality} quality has been recorded. Thank you for using KADAFI.`,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log(result);
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
 
   // // get farmer phoneNumber by getting his details from the db
-  // async function getFarmerPhoneNumber(id) {
-  //   const result = await axios.get(`http://localhost:8080/member/${id}`);
-  //   console.log(result.data);
-  //   return result.data.phoneNumber;
-  // }
+  async function getFarmerPhoneNumber(id) {
+    const result = await axios.get(`http://localhost:8080/farmer/member/${id}`);
+    console.log(result.data);
+    return result.data.phoneNumber;
+  }
 
 
-
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const result = await axios.post(url, delivery);
+    console.log(result);
+    handleClose();
+    fetchData();
 
-    axios
-      .post(url, delivery)
-      .then((res) => {
-        //check is status is 201
-        if (res.status === 201) {
-          history.push("/newdelivery");
-          fetchData();
-          console.log("MEMBER ID",res.data.member_id);
-        } else {
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const phoneNumber = await getFarmerPhoneNumber(delivery.member_id);
+    const milkQuality = delivery.milk_quality;
+    const milkQuantity = delivery.milk_quantity;
+    sendSMS(phoneNumber, milkQuality, milkQuantity);
 
-    setShow(false);
+    history.push("/newdelivery");
   };
 
   return (
