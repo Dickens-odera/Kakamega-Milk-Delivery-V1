@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 // import axios from "axios";
 
 const MilkDelivered = () => {
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const url = "http://localhost:8080/delivery/add";
@@ -28,11 +28,12 @@ const MilkDelivered = () => {
   };
 
   //   function to fetch all farmsers in db
- async function fetchData() {
+  async function fetchData() {
     const result = await axios.get("http://localhost:8080/delivery/all");
-    console.log(result.data);
+     console.log(result.data);
     setDelivery(result.data);
   }
+
 
 
   useEffect(() => {
@@ -64,16 +65,16 @@ const MilkDelivered = () => {
                 <h3>Deliveries</h3>
               </div>
               <div>
-                  <Button
-                    variant="primary"
-                    style={{
-                      marginBottom: "1rem",
-                      backgroundColor: "#0C7631",
-                    }}
-                    onClick={handleShow}
-                  >
+                <Button
+                  variant="primary"
+                  style={{
+                    marginBottom: "1rem",
+                    backgroundColor: "#0C7631",
+                  }}
+                  onClick={handleShow}
+                >
                   New Delivery
-                  </Button>
+                </Button>
 
                 <br />
 
@@ -109,7 +110,7 @@ const MilkDelivered = () => {
                             </div>
                             <div class="form-group">
                               <label for="exampleInputPassword1">
-                              Milk Quantity
+                                Milk Quantity
                               </label>
                               <input
                                 type="text"
@@ -205,17 +206,21 @@ const MilkDelivered = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {delivery.map((delivery) => (
+                            {delivery.length > 0 ? (
+                              delivery.map((delivery) => (
+                                <tr key={delivery.delivery_id}>
+                                  <td>{delivery.member_id}</td>
+                                  <td>{delivery.milk_quality}</td>
+                                  <td>{delivery.milk_quantity}</td>
+                                  <td>{delivery.collectors_id}</td>
+                                  <td>{delivery.dateOfDelivery}</td>
+                                </tr>
+                              ))
+                            ) : (
                               <tr>
-                                <td>{delivery.member_id}</td>
-                                <td>{delivery.milk_quality}</td>
-                                <td>{delivery.milk_quantity}</td>
-                                <td>{delivery.collectors_id}</td>
-                                <td>{delivery.dateOfDelivery}</td>
+                                <td colSpan={5}>No data</td>
                               </tr>
-                            ))}
-
-                          
+                            )}
                           </tbody>
                         </table>
                       </div>
