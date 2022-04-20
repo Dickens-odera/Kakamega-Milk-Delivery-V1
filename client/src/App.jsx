@@ -11,7 +11,6 @@ import {
 import { Container, Row, Col } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Sidebar from "./components/dashboard/Sidebar";
-import styled from "styled-components";
 import Collectors from "./components/dashboard/Collectors";
 import Farmers from "./components/dashboard/Farmers";
 import Deliveries from "./components/dashboard/Deliveries";
@@ -47,7 +46,6 @@ const App = () => {
         <Route path="/collectors" exact={true} component={Collectors} />
         <Route path="/farmers" exact={true} component={Farmers} />
         <Route path="/deliveries" exact={true} component={Deliveries} />
-        <Route path="/payments" exact={true} component={Deliveries} />
         <Route path="/settings" exact={true} component={Settings} />
         <Route path="/new" exact={true} component={NewFarmer} />
         <Route path="/newdelivery" exact={true} component={MilkDelivered} />
