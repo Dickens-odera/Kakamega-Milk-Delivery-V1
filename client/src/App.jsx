@@ -34,45 +34,23 @@ const App = () => {
               <NavbarItem />
               <Welcome />
               <NewDeliveryItem />
-              {/* <MilkDeliveries /> */}
             </Row>
           </Container>
-        </Route>
-        <Route path="/collectors">
-          <Sidebar />
-          <Collectors />
-        </Route>
-        <Route path="/farmers">
-          <Sidebar />
-          <Farmers />
-        </Route>
-        <Route path="/transactions">
-          {/* <Sidebar /> */}
-          {/* <Register /> */}
         </Route>
         <Route path="/logout">
           <Logout />
         </Route>
-        <Route path="/payments">
-          {/* <Sidebar /> */}
-          {/* <Register /> */}
-        </Route>
-        <Route path="/deliveries">
-          <Sidebar />
-          <Deliveries />
-        </Route>
-        <Route path="/settings">
-          <Sidebar />
-          <Settings />
-        </Route>
-        <Route path="/new">
-          <Sidebar />
-          <NewFarmer />
-        </Route>
-        <Route path="/newdelivery">
-          <Sidebar />
-          <MilkDelivered />
-        </Route>
+      </Switch>
+      {/* dashboard routes */}
+      <Sidebar />
+      <Switch>
+        <Route path="/collectors" exact={true} component={Collectors} />
+        <Route path="/farmers" exact={true} component={Farmers} />
+        <Route path="/deliveries" exact={true} component={Deliveries} />
+        <Route path="/payments" exact={true} component={Deliveries} />
+        <Route path="/settings" exact={true} component={Settings} />
+        <Route path="/new" exact={true} component={NewFarmer} />
+        <Route path="/newdelivery" exact={true} component={MilkDelivered} />
       </Switch>
     </Router>
   );
