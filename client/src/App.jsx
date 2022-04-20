@@ -35,7 +35,6 @@ const App = () => {
               <Welcome />
               <NewDeliveryItem />
               {/* <MilkDeliveries /> */}
-              <Footer />
             </Row>
           </Container>
         </Route>

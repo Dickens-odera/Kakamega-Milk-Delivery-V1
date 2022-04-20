@@ -1,22 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { MilkDeliveryContext } from '../context/MilkDeliveryContext';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect, useContext } from "react";
+import { MilkDeliveryContext } from "../context/MilkDeliveryContext";
+import { Button } from "react-bootstrap";
 
 const Welcome = () => {
-    const { connectWallet, connectedAccount, isConnectedToRinkeby, networkId } = useContext(MilkDeliveryContext);
-    return(
-        <div className="md-3">
-            {!connectedAccount && 
-                <Button onClick={connectWallet} 
-                style={{backgroundColor:"#0c7631"}}
-                >Connect Wallet</Button>
-            }
+  const { connectWallet, connectedAccount, isConnectedToRinkeby, networkId } =
+    useContext(MilkDeliveryContext);
+  return (
+    <>
+      <div className="welcome-text">
+        <h3 className="textDesc">KAKAMEGA MILK DELIVERY BLOCKCHAIN SYSTEM</h3>
+      </div>
+      <div className="btn-connect">
+        {!connectedAccount && (
+          <Button
+            onClick={connectWallet}
+            style={{
+              backgroundColor: "#0c7631",
+              color: "white",
+              border: "none",
+            }}
+          >
+            Connect Wallet
+          </Button>
+        )}
 
-            {networkId && networkId != 4 &&
-                <p style={{ color:"red"}}>Please switch your network to Rinkeby Testnet</p>
-            }
-        </div>
-    );
-}
+        {networkId && networkId != 4 && (
+          <p style={{ color: "red" }}>
+            Please switch your network to Rinkeby Testnet
+          </p>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default Welcome;

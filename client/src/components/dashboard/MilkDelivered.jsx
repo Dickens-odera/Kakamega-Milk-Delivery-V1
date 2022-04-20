@@ -10,10 +10,11 @@ import { Link } from "react-router-dom";
 
 const MilkDelivered = () => {
   const [show, setShow] = useState(false);
-  const [sms, setSms] = useState(false);
   const handleClose = () => setShow(false);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const handleShow = () => setShow(true);
+
   const url = "http://localhost:8080/delivery/add";
 
   const [delivery, setDelivery] = useState({
@@ -69,11 +70,14 @@ const MilkDelivered = () => {
     handleClose();
     fetchData();
 
+    //get phone number
     const phoneNumber = await getFarmerPhoneNumber(delivery.member_id);
     const milkQuality = delivery.milk_quality;
     const milkQuantity = delivery.milk_quantity;
+    //send SMS
     sendSMS(phoneNumber, milkQuality, milkQuantity);
 
+    //reload the page to update the table
     history.push("/newdelivery");
   };
 

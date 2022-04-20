@@ -3,3 +3,15 @@ background-color: #0c7631 !important;
 color: #fff;
 
 }
+.btn-connect{
+    margin: 0 auto !important;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    
+}
+.textDesc{
+    text-align: center;
+    /* padding-top: 120px; */
+    color: #0c7631;
+}
