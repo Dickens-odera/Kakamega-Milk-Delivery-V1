@@ -12,7 +12,7 @@ ReactDOM.render(
         <App />
 
       </Container>
-    </React.StrictMode>,
+    </React.StrictMode>
   </MilkDeliveryProvider>,
   document.getElementById('root')
 )
